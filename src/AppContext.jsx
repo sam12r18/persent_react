@@ -2,7 +2,7 @@
 import React, {createContext, useContext} from 'react';
 
 const ServerContext = createContext({
-    serverAddress: 'https://presence-absence.liara.run/api/',
+    serverAddress: 'http://127.0.0.1:8017/api/v1/',
 });
 
 export const ServerProvider = ({children}) => {

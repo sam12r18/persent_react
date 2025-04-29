@@ -28,7 +28,7 @@ export default function LoginPage() {
         console.log("Response:", data);
 
         try {
-            const response = await axios.post(`${serverAddress}user/auth`, data);
+            const response = await axios.post(`${serverAddress}auth/login`, data);
 
 
 
