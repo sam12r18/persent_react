@@ -8,17 +8,16 @@ import Swal from "sweetalert2";
 import Spinner from 'react-bootstrap/Spinner';
 import {useServer} from "../../AppContext.jsx";
 import {Link, useNavigate} from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 
 export default function Register() {
-   
     const [isFocused, setIsFocused] = useState(false);
     const [isFocused2, setIsFocused2] = useState(false);
     const [isFocused3, setIsFocused3] = useState(false);
     const [isFocused4, setIsFocused4] = useState(false);
-    const [isFocused5, setIsFocused5] = useState(false);
-    const [isFocused6, setIsFocused6] = useState(false);
     const [loading, setLoading] = useState(false);
+    const location = useLocation();
 
     const {serverAddress} = useServer();
     const navigate = useNavigate();
@@ -36,7 +35,7 @@ export default function Register() {
         setLoading(true);
         try {
 
-            const response = await axios.post(`${serverAddress}user/register`, data ,);
+            const response = await axios.post(`${serverAddress}auth/register`, data ,);
 
             console.log("Response:", response);
 
@@ -59,10 +58,12 @@ export default function Register() {
 
           if (response.status === 200){
               setTimeout(() => {
-                  navigate(`/otp?phoneNumber=${data.phoneNumber}&Links && rgister`);
+                navigate(`/otp?mobile=${data.mobile}&page=register`);
               }, 500);
           }
         } catch (error) {
+            console.log("error is :",error);
+            
             const Toast = Swal.mixin({
                 toast: true,
                 position: "top-end",
@@ -95,7 +96,7 @@ export default function Register() {
             value = "09" + value.slice(2);
             if (value.length > 11) value = value.slice(0, 11);
         }
-        setValue("phoneNumber", value, { shouldValidate: true });
+        setValue("mobile", value, { shouldValidate: true });
         e.target.value = value;
     };
 
@@ -123,51 +124,11 @@ export default function Register() {
                 </div>
                 <div>
                     <Form onSubmit={handleSubmit(onSubmit)}>
-                        <Form.Group className=" position-relative" controlId="formfirstName">
-                            <Form.Label
-                                column="sm"
-                                className={`rounded-4 fs-6 py-2 px-2 ${
-                                    isFocused || errors.firstName ? "text-orange" : "text-color"
-                                }`}
-                            >
-                                نام
-                            </Form.Label>
-                            <Form.Control
-                                type="text"
-                                className="rounded-5 py-3 no-arrows text-end"
-                                {...register("firstName")}
-                                onFocus={() => setIsFocused(true)}
-                                onBlur={() => setIsFocused(false)}
-                            />
-                            {errors.firstName && (
-                                <p className="text-danger mt-2">{errors.firstName.message}</p>
-                            )}
-                        </Form.Group>
-                        <Form.Group className="my-4 position-relative" controlId="formlastName">
-                            <Form.Label
-                                column="sm"
-                                className={`rounded-4 fs-6 py-2 px-2  ${
-                                    isFocused2 || errors.lastName ? "text-orange" : "text-color"
-                                }`}
-                            >
-                                نام خانوادگی
-                            </Form.Label>
-                            <Form.Control
-                                type="text"
-                                className="rounded-5 py-3 no-arrows text-end"
-                                {...register("lastName")}
-                                onFocus={() => setIsFocused2(true)}
-                                onBlur={() => setIsFocused2(false)}
-                            />
-                            {errors.lastName && (
-                                <p className="text-danger mt-2">{errors.lastName.message}</p>
-                            )}
-                        </Form.Group>
                         <Form.Group className="mb-4 position-relative" controlId="formBasicEmail">
                             <Form.Label
                                 column="sm"
                                 className={`rounded-4 fs-6 py-2 px-2 ${
-                                    isFocused3 || errors.phoneNumber ? "text-orange" : "text-color"
+                                    isFocused || errors.mobile ? "text-orange" : "text-color"
                                 }`}
                             >
                                 موبایل
@@ -176,7 +137,7 @@ export default function Register() {
                                 type="number"
                                 placeholder="0912"
                                 className="rounded-5 py-3 no-arrows text-end"
-                                {...register("phoneNumber", {
+                                {...register("mobile", {
                                     required: "شماره موبایل الزامی است",
                                     pattern: {
                                         value: /^09\d{9}$/,
@@ -192,18 +153,18 @@ export default function Register() {
                                     },
                                 })}
                                 onChange={handleMobileChange}
-                                onFocus={() => setIsFocused3(true)}
-                                onBlur={() => setIsFocused3(false)}
+                                onFocus={() => setIsFocused(true)}
+                                onBlur={() => setIsFocused(false)}
                             />
-                            {errors.phoneNumber && (
-                                <p className="text-danger mt-2">{errors.phoneNumber.message}</p>
+                            {errors.mobile && (
+                                <p className="text-danger mt-2">{errors.mobile.message}</p>
                             )}
                         </Form.Group>
                         <Form.Group className=" mb-4 position-relative" controlId="formBasicPassword">
                             <Form.Label
                                 column="sm"
                                 className={`rounded-4 fs-6 py-2 px-2 ${
-                                    isFocused4 || errors.password ? "text-orange" : "text-color"
+                                    isFocused2 || errors.password ? "text-orange" : "text-color"
                                 }`}
                             >
                                 رمز ورود جدید
@@ -223,8 +184,8 @@ export default function Register() {
                                         message: "رمز عبور باید شامل یک حرف بزرگ و یک عدد باشد",
                                     },
                                 })}
-                                onFocus={() => setIsFocused4(true)}
-                                onBlur={() => setIsFocused4(false)}
+                                onFocus={() => setIsFocused2(true)}
+                                onBlur={() => setIsFocused2(false)}
                             />
                             {errors.password && (
                                 <p className="text-danger mt-2">{errors.password.message}</p>
@@ -234,7 +195,7 @@ export default function Register() {
                            <Form.Label
                                 column="sm"
                                 className={`rounded-4 fs-6 py-2 px-2 ${
-                                    isFocused5 || errors.confirmPassword ? "text-orange" : "text-color"
+                                    isFocused3 || errors.confirmPassword ? "text-orange" : "text-color"
                                 }`}
                             >
                                 تأیید رمز ورود جدید
@@ -248,8 +209,8 @@ export default function Register() {
                                     validate: (value) =>
                                         value === watch("password") || "رمز عبور و تأیید آن باید یکسان باشند"
                                 })}
-                                onFocus={() => setIsFocused5(true)}
-                                onBlur={() => setIsFocused5(false)}
+                                onFocus={() => setIsFocused3(true)}
+                                onBlur={() => setIsFocused3(false)}
                             />
                             {errors.confirmPassword && (
                                 <p className="text-danger mt-2">{errors.confirmPassword.message}</p>
@@ -259,7 +220,7 @@ export default function Register() {
                             <Form.Label
                                 column="sm"
                                 className={`rounded-4 fs-6 py-2 px-2 ${
-                                    isFocused6 || errors.referralCode ? "text-orange" : "text-color"
+                                    isFocused4 || errors.referralCode ? "text-orange" : "text-color"
                                 }`}
                             >
                                 کدمعرف
@@ -267,12 +228,12 @@ export default function Register() {
                             <Form.Control
                                 type="number"
                                 className="rounded-5 py-3 no-arrows text-end"
-                                {...register("referral")}
-                                onFocus={() => setIsFocused6(true)}
-                                onBlur={() => setIsFocused6(false)}
+                                {...register("ref_code")}
+                                onFocus={() => setIsFocused4(true)}
+                                onBlur={() => setIsFocused4(false)}
                             />
-                            {errors.referral   && (
-                                <p className="text-danger mt-2">{errors.referral  .message}</p>
+                            {errors.ref_code   && (
+                                <p className="text-danger mt-2">{errors.ref_code  .message}</p>
                             )}
                         </Form.Group>
 
