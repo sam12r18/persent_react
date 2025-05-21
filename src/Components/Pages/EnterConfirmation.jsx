@@ -136,7 +136,7 @@ export default function EnterConfirmation() {
                     >
                         تایید و ثبت ورود
                     </Link>
-                    <Link to={"/registration-of-attendance"} className={"btn bg-smooth-gray w-100 text-white fs-5 rounded-5 my-2 p-3"}>
+                    <Link to={"/employee-dashboard"} className={"btn bg-smooth-gray w-100 text-white fs-5 rounded-5 my-2 p-3"}>
                         بازگشت
                     </Link>
                 </div>

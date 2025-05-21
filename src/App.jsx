@@ -1,5 +1,6 @@
 import "bootstrap/dist/css/bootstrap.rtl.min.css";
 import './App.css'
+import 'leaflet/dist/leaflet.css';
 import Index from "./Layout/Index.jsx";
 import {Route, Router, Routes} from "react-router-dom";
 import OTP from "./Components/Pages/OTP.jsx";
@@ -8,7 +9,7 @@ import NewPassword from "./Components/Pages/NewPassword.jsx";
 import Terms from "./Components/Pages/Terms.jsx";
 import Register from "./Components/Pages/Register.jsx";
 import InviteBox from "./Components/Pages/InviteBox.jsx";
-import RegistrationOfAttendance from "./Components/Pages/RegistrationOfAttendance.jsx";
+import EmployeeDashboard from "./Components/Pages/EmployeeDashboard.jsx";
 import EnterConfirmation from "./Components/Pages/EnterConfirmation.jsx";
 import SuccesEntery from "./Components/Pages/SuccesEntery.jsx";
 import ExitConfirmation from "./Components/Pages/ExitConfirmation.jsx";
@@ -20,6 +21,9 @@ import Employees from "./Components/Pages/Employees.jsx";
 import NewEmployee from "./Components/Pages/NewEmployee.jsx";
 import Profile from "./Components/Pages/Profile.jsx";
 import LoginPage from "./Components/Pages/Login.jsx";
+import EmployeesTasks from "./Components/Pages/EmployeesTasks.jsx";
+import AddTask from "./Components/Pages/AddTask.jsx";
+
 
 
 function App() {
@@ -35,7 +39,7 @@ function App() {
                     <Route path="/terms" element={<Terms/>}/>
                     <Route path="/register" element={<Register/>}/>
                     <Route path="/invite-box" element={<InviteBox/>}/>
-                    <Route path="/registration-of-attendance" element={<RegistrationOfAttendance/>}/>
+                    <Route path="/employee-dashboard" element={<EmployeeDashboard/>}/>
                     <Route path="/enter-confirmation" element={<EnterConfirmation/>}/>
                     <Route path="/exit-confirmation" element={<ExitConfirmation/>}/>
                     <Route path="/succesentery" element={<SuccesEntery/>}/>
@@ -45,6 +49,9 @@ function App() {
                     <Route path="/employees" element={<Employees/>}/>
                     <Route path="/new-employees" element={<NewEmployee/>}/>
                     <Route path="/profile" element={<Profile/>}/>
+                    <Route path="/employees-tasks" element={<EmployeesTasks/>}/>
+                    <Route path="/add-tasks" element={<AddTask/>}/>
+
 
                     {/*<Route path="*" element={<NotFound/>}/>*/}
                 </Routes>

@@ -112,7 +112,7 @@ export default function ExitConfirmation() {
                         درصورت درست بودن محل و زمان دکمه تایید را بزنید
                     </span>
                     <Button className={"btn bg-orange w-100 text-white fs-5 rounded-5 my-3 p-3"} type={"submit"}>تایید و ثبت ورود</Button>
-                    <Link to={"/registration-of-attendance"} className={"btn bg-smooth-gray w-100 text-white fs-5 rounded-5 my-2 p-3"}> بازگشت</Link>
+                    <Link to={"/employee-dashboard"} className={"btn bg-smooth-gray w-100 text-white fs-5 rounded-5 my-2 p-3"}> بازگشت</Link>
                 </div>
             </div>
         </Container>

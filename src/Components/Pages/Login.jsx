@@ -29,8 +29,7 @@ export default function LoginPage() {
 
     try {
       const response = await axios.post(`${serverAddress}auth/login`, data);
-      console.log("this is respnose" , response);
-      
+      console.log("this is respnose", response);
 
       if (response.status === 200) {
         localStorage.setItem("authToken", response?.data?.token);
@@ -51,18 +50,20 @@ export default function LoginPage() {
           title: "ورود موفقیت‌آمیز بود!",
         });
 
-        const role = response.data.role;
-        if (role === "new") {
+        const company = response?.data?.companies;
+        // console.log("This is my company", company);
+
+        if (Array.isArray(company) && company.length === 0) {
           setTimeout(() => {
             navigate(`/invite-box`);
           }, 500);
-        } else if (role === "admin") {
+        } else if (company?.[0]?.role === "admin") {
           setTimeout(() => {
             navigate(`/admin-dashboard`);
           }, 500);
-        } else if (role === "employee") {
+        } else if (company?.[0]?.role === "employee") {
           setTimeout(() => {
-            navigate(`/registration-of-attendance`);
+            navigate(`/employee-dashboard`);
           }, 500);
         }
       }
