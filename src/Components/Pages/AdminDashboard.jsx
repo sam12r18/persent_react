@@ -161,6 +161,17 @@ export default function AdminDashboard() {
                             </Link>
                         </div>
                     </div>
+                    <div className="d-flex bg-orange justify-content-between rounded-4 p-3 mt-3 mb-2">
+                        <div>
+                            <span className="text-white fs-5">افزودن تسک برای کارمندان</span>
+                        </div>
+                        <div className="d-flex align-items-end gap-3">
+                            <Link to={"/Employees-tasks"}  className="btn btn-green text-nowrap rounded-4 text-white fs-7">
+                                افزودن
+                            </Link>
+                        </div>
+                    </div>
+                    
                 </div>
             </div>
         </Container>
