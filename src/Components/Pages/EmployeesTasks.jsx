@@ -25,7 +25,8 @@ export default function EmployeesTasks() {
 
   const onSubmit = async (data) => {
     try {
-      const response = await axios.post(``, data);
+      const response = await axios.get(``, data);
+      
 
       const Toast = Swal.mixin({
         toast: true,
@@ -94,46 +95,64 @@ export default function EmployeesTasks() {
             </span>
           </div>
           <div className="col-12">
-            <div className="d-flex bg-secondary justify-content-between rounded-4 p-2 mt-2 mb-3">
+            <div className="d-flex bg-secondary justify-content-between rounded-4 p-2 mt-2 mb-3 py-3">
               <div className={"d-flex flex-column"}>
                 <span className="text-white fs-5">عرفان محسنی </span>
               </div>
               <div className="d-flex align-items-end">
                 <Link
                   to={"/add-task"}
-                  className="btn btn-blue text-nowrap rounded-4 text-white fs-7 px-4"
+                  className="btn btn-green text-nowrap rounded-4 text-white fs-7 me-2 px-2"
                 >
                   ایجاد تسک
+                </Link>
+                <Link
+                  to={"/show-task"}
+                  className="btn btn-blue text-nowrap rounded-4 text-white fs-7 px-2"
+                >
+                   نمایش تسک 
                 </Link>
               </div>
             </div>
           </div>
           <div className="col-12">
-            <div className="d-flex bg-secondary justify-content-between rounded-4 p-2 mt-2 mb-3">
+            <div className="d-flex bg-secondary justify-content-between rounded-4 p-2 mt-2 mb-3 py-3">
               <div className={"d-flex flex-column"}>
                 <span className="text-white fs-5">عرفان محسنی </span>
               </div>
               <div className="d-flex align-items-end">
                 <Link
                   to={"/add-task"}
-                  className="btn btn-blue text-nowrap rounded-4 text-white fs-7 px-4"
+                  className="btn btn-green text-nowrap rounded-4 text-white fs-7 me-2 px-2"
                 >
                   ایجاد تسک
+                </Link>
+                <Link
+                  to={"/show-task"}
+                  className="btn btn-blue text-nowrap rounded-4 text-white fs-7 px-2"
+                >
+                   نمایش تسک 
                 </Link>
               </div>
             </div>
           </div>
           <div className="col-12">
-            <div className="d-flex bg-secondary justify-content-between rounded-4 p-2 mt-2 mb-3">
+            <div className="d-flex bg-secondary justify-content-between rounded-4 p-2 mt-2 mb-3 py-3">
               <div className={"d-flex flex-column"}>
                 <span className="text-white fs-5">عرفان محسنی </span>
               </div>
               <div className="d-flex align-items-end">
                 <Link
                   to={"/add-task"}
-                  className="btn btn-blue text-nowrap rounded-4 text-white fs-7 px-4"
+                  className="btn btn-green text-nowrap rounded-4 text-white fs-7 me-2 px-2"
                 >
                   ایجاد تسک
+                </Link>
+                <Link
+                  to={"/show-task"}
+                  className="btn btn-blue text-nowrap rounded-4 text-white fs-7 px-2"
+                >
+                   نمایش تسک 
                 </Link>
               </div>
             </div>
