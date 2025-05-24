@@ -14,7 +14,7 @@ import EnterConfirmation from "./Components/Pages/EnterConfirmation.jsx";
 import SuccesEntery from "./Components/Pages/SuccesEntery.jsx";
 import ExitConfirmation from "./Components/Pages/ExitConfirmation.jsx";
 import {ProfileProvider} from "./contexts/profile-context.jsx";
-import CreateCompany from "./Components/Pages/CreateComoany.jsx";
+import CreateCompany from "./Components/Pages/CreateCompany.jsx";
 import AdminDashboard from "./Components/Pages/AdminDashboard.jsx";
 import History from "./Components/Pages/History.jsx";
 import Employees from "./Components/Pages/Employees.jsx";
@@ -23,6 +23,8 @@ import Profile from "./Components/Pages/Profile.jsx";
 import LoginPage from "./Components/Pages/Login.jsx";
 import EmployeesTasks from "./Components/Pages/EmployeesTasks.jsx";
 import AddTask from "./Components/Pages/AddTask.jsx";
+import ViewEmployeeTask from "./Components/Pages/ViewEmpolyeeTask.jsx";
+import EditTask from "./Components/Pages/EditTask.jsx";
 
 
 
@@ -50,7 +52,9 @@ function App() {
                     <Route path="/new-employees" element={<NewEmployee/>}/>
                     <Route path="/profile" element={<Profile/>}/>
                     <Route path="/employees-tasks" element={<EmployeesTasks/>}/>
-                    <Route path="/add-tasks" element={<AddTask/>}/>
+                    <Route path="/add-task" element={<AddTask/>}/>
+                    <Route path="/edit-task" element={<EditTask/>}/>
+                    <Route path="/view-task" element={<ViewEmployeeTask/>}/>
 
 
                     {/*<Route path="*" element={<NotFound/>}/>*/}

@@ -57,7 +57,7 @@ export default function LoginPage() {
           setTimeout(() => {
             navigate(`/invite-box`);
           }, 500);
-        } else if (company?.[0]?.role === "admin") {
+        } else if (company?.[0]?.role === "owner") {
           setTimeout(() => {
             navigate(`/admin-dashboard`);
           }, 500);
