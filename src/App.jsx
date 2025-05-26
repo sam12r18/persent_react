@@ -3,28 +3,29 @@ import './App.css'
 import 'leaflet/dist/leaflet.css';
 import Index from "./Layout/Index.jsx";
 import {Route, Router, Routes} from "react-router-dom";
-import OTP from "./Components/Pages/OTP.jsx";
-import ForgetPassword from "./Components/Pages/ForgetPassword.jsx";
-import NewPassword from "./Components/Pages/NewPassword.jsx";
-import Terms from "./Components/Pages/Terms.jsx";
-import Register from "./Components/Pages/Register.jsx";
-import InviteBox from "./Components/Pages/InviteBox.jsx";
-import EmployeeDashboard from "./Components/Pages/EmployeeDashboard.jsx";
-import EnterConfirmation from "./Components/Pages/EnterConfirmation.jsx";
-import SuccesEntery from "./Components/Pages/SuccesEntery.jsx";
-import ExitConfirmation from "./Components/Pages/ExitConfirmation.jsx";
+import OTP from "./Pages/OTP.jsx";
+import ForgetPassword from "./Pages/ForgetPassword.jsx";
+import NewPassword from "./Pages/NewPassword.jsx";
+import Terms from "./Pages/Terms.jsx";
+import Register from "./Pages/Register.jsx";
+import InviteBox from "./Pages/InviteBox.jsx";
+import EmployeeDashboard from "./Pages/EmployeeDashboard.jsx";
+import EnterConfirmation from "./Pages/EnterConfirmation.jsx";
+import SuccesEntery from "./Pages/SuccesEntery.jsx";
+import ExitConfirmation from "./Pages/ExitConfirmation.jsx";
 import {ProfileProvider} from "./contexts/profile-context.jsx";
-import CreateCompany from "./Components/Pages/CreateCompany.jsx";
-import AdminDashboard from "./Components/Pages/AdminDashboard.jsx";
-import History from "./Components/Pages/History.jsx";
-import Employees from "./Components/Pages/Employees.jsx";
-import NewEmployee from "./Components/Pages/NewEmployee.jsx";
-import Profile from "./Components/Pages/Profile.jsx";
-import LoginPage from "./Components/Pages/Login.jsx";
-import EmployeesTasks from "./Components/Pages/EmployeesTasks.jsx";
-import AddTask from "./Components/Pages/AddTask.jsx";
-import ViewEmployeeTask from "./Components/Pages/ViewEmpolyeeTask.jsx";
-import EditTask from "./Components/Pages/EditTask.jsx";
+import CreateCompany from "./Pages/CreateCompany.jsx";
+import AdminDashboard from "./Pages/AdminDashboard.jsx";
+import History from "./Pages/History.jsx";
+import Employees from "./Pages/Employees.jsx";
+import NewEmployee from "./Pages/NewEmployee.jsx";
+import Profile from "./Pages/Profile.jsx";
+import LoginPage from "./Pages/Login.jsx";
+import EmployeesTasks from "./Pages/EmployeesTasks.jsx";
+import AddTask from "./Pages/AddTask.jsx";
+import ViewEmployeeTask from "./Pages/ViewEmpolyeeTask.jsx";
+import EditTask from "./Pages/EditTask.jsx";
+import MyTasks from "./Pages/MyTasks.jsx";
 
 
 
@@ -55,6 +56,7 @@ function App() {
                     <Route path="/add-task" element={<AddTask/>}/>
                     <Route path="/edit-task" element={<EditTask/>}/>
                     <Route path="/view-task" element={<ViewEmployeeTask/>}/>
+                    <Route path="/my-tasks" element={<MyTasks/>}/>
 
 
                     {/*<Route path="*" element={<NotFound/>}/>*/}

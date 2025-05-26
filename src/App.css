@@ -138,6 +138,17 @@ input:focus  {
 .rmdp-container{
   display: block !important;
 }
+.truncate-2-lines {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;           /* فقط 2 خط نمایش بده */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.text-justifyed{
+  text-align: justify;
+}
+
 
 
 

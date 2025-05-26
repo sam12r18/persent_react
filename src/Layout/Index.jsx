@@ -1,8 +1,8 @@
 
 import {Container} from "react-bootstrap";
 
-import Register from "../Components/Pages/Register.jsx";
-import LoginPage from "../Components/Pages/Login.jsx";
+import Register from "../Pages/Register.jsx";
+import LoginPage from "../Pages/Login.jsx";
 const Inedex = () => {
 
 

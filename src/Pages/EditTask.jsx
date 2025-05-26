@@ -4,14 +4,19 @@ import Form from "react-bootstrap/Form";
 import { useState } from "react";
 import Spinner from "react-bootstrap/Spinner";
 import { Link, useNavigate } from "react-router-dom";
-import { useServer } from "../../AppContext.jsx";
+import { useServer } from "../AppContext";
 import axios from "axios";
 import Swal from "sweetalert2";
 import { useForm } from "react-hook-form";
+import DatePicker from "react-multi-date-picker";
+import persian from "react-date-object/calendars/persian";
+import persian_fa from "react-date-object/locales/persian_fa";
 
 export default function EditTask() {
   const [isFocused, setIsFocused] = useState(false);
   const [isFocused2, setIsFocused2] = useState(false);
+  const [isFocused3, setIsFocused3] = useState(false);
+  const [isFocused4, setIsFocused4] = useState(false);
   const [loading, setLoading] = useState(false);
   const [task, setTask] = useState(false);
   const navigate = useNavigate();
@@ -19,11 +24,20 @@ export default function EditTask() {
   const {
     register,
     handleSubmit,
+    setValue,
     watch,
     formState: { errors },
   } = useForm({
     mode: "onChange",
+    defaultValues: {
+      task_title: "",
+      task_description: "",
+      start_date: null,
+      end_date: null,
+    },
   });
+  const start_date = watch("start_date");
+  const end_date = watch("end_date");
 
   const onSubmit = async (data) => {
     console.log(data);
@@ -36,9 +50,9 @@ export default function EditTask() {
           Authorization: `Bearer ${Token}`,
         },
       });
-      console.log("this is employee task : ", employeeTask) ;
-      setTask(employeeTask?.data)
-      
+      console.log("this is employee task : ", employeeTask);
+      setTask(employeeTask?.data);
+
       const response = await axios.post(`${serverAddress}`, data);
       console.log("Response:", response.data);
 
@@ -114,7 +128,7 @@ export default function EditTask() {
         <div className="mt-5 mb-5">
           <Form onSubmit={handleSubmit(onSubmit)}>
             <Form.Group
-              className="mb-3 mt-4 position-relative"
+              className="mb-5 mt-5 position-relative"
               controlId="taskTitle"
             >
               <Form.Label
@@ -128,9 +142,11 @@ export default function EditTask() {
               <Form.Control
                 type="text"
                 value={task?.title}
-                onChange={(e)=> setTask(e.target.value)}
+                onChange={(e) => setTask(e.target.value)}
                 className="rounded-5 py-3 no-arrows text-end"
-                {...register("task_title")}
+                {...register("task_title", {
+                  required: "نام وظیفه نباید خالی باشد",
+                })}
                 onFocus={() => setIsFocused(true)}
                 onBlur={() => setIsFocused(false)}
                 readOnly
@@ -140,7 +156,7 @@ export default function EditTask() {
               )}
             </Form.Group>
             <Form.Group
-              className="mb-3 position-relative mt-4"
+              className="mb-5 mt-5 position-relative "
               controlId="taskDescription"
             >
               <Form.Label
@@ -154,11 +170,13 @@ export default function EditTask() {
                 توضیحات وظیفه
               </Form.Label>
               <textarea
-                {...register("task_description")}
+                {...register("task_description", {
+                  required: "توضیحات وظیفه نمی‌تواند خالی باشد",
+                })}
                 onFocus={() => setIsFocused2(true)}
                 onBlur={() => setIsFocused2(false)}
                 value={task?.description}
-                onChange={(e)=>setTask(e.target.value)}
+                onChange={(e) => setTask(e.target.value)}
                 className="rounded-5 py-3 no-arrows text-right w-100 px-2"
                 style={{ direction: "rtl", textAlign: "right" }}
               />
@@ -168,6 +186,92 @@ export default function EditTask() {
                 </p>
               )}
             </Form.Group>
+            <div className="d-flex row mb-5 mt-5">
+              <div className="col-6">
+                <Form.Group className="position-relative" controlId="startDate">
+                  <Form.Label
+                    column="sm"
+                    className={`rounded-4 fs-6 py-2 px-2 ${
+                      isFocused3 || errors.start_date
+                        ? "text-orange"
+                        : "text-color"
+                    }`}
+                  >
+                    از تاریخ
+                  </Form.Label>
+                  <DatePicker
+                    inputClass="form-control rounded-5 py-3 text-end"
+                    calendar={persian}
+                    locale={persian_fa}
+                    value={start_date}
+                    {...register("start_date", {
+                      required: "تاریخ شروع نمی‌تواند خالی باشد",
+                      validate: {
+                        notPast: (value) =>
+                          value >= new Date().setHours(0, 0, 0, 0) ||
+                          "تاریخ شروع نمی‌تواند در گذشته باشد",
+                        validEnd: (value) =>
+                          !end_date ||
+                          value <= end_date ||
+                          "تاریخ شروع باید قبل یا برابر با تاریخ پایان باشد",
+                      },
+                    })}
+                    onChange={(date) =>
+                      setValue("start_date", date?.toDate?.() || null, {
+                        shouldValidate: true,
+                      })
+                    }
+                    onFocus={() => setIsFocused3(true)}
+                    onBlur={() => setIsFocused3(false)}
+                  />
+                  {errors.start_date && (
+                    <p className="text-danger mt-2">
+                      {errors.start_date.message}
+                    </p>
+                  )}
+                </Form.Group>
+              </div>
+              <div className="col-6">
+                <Form.Group className="position-relative" controlId="endDate">
+                  <Form.Label
+                    column="sm"
+                    className={`rounded-4 fs-6 py-2 px-2 ${
+                      isFocused4 || errors.end_date
+                        ? "text-orange"
+                        : "text-color"
+                    }`}
+                  >
+                    تا تاریخ
+                  </Form.Label>
+                  <DatePicker
+                    inputClass="form-control rounded-5 py-3 text-end"
+                    calendar={persian}
+                    locale={persian_fa}
+                    value={end_date}
+                    minDate={start_date}
+                    {...register("end_date", {
+                      required: "تاریخ پایان نمی‌تواند خالی باشد",
+                      validate: (value) =>
+                        !start_date ||
+                        value >= start_date ||
+                        "تاریخ پایان باید بعد یا برابر با تاریخ شروع باشد",
+                    })}
+                    onChange={(date) =>
+                      setValue("end_date", date?.toDate?.() || null, {
+                        shouldValidate: true,
+                      })
+                    }
+                    onFocus={() => setIsFocused4(true)}
+                    onBlur={() => setIsFocused4(false)}
+                  />
+                  {errors.end_date && (
+                    <p className="text-danger mt-2">
+                      {errors.end_date.message}
+                    </p>
+                  )}
+                </Form.Group>
+              </div>
+            </div>
             <Button
               variant="primary"
               type="submit"

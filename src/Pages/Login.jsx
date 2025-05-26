@@ -7,7 +7,7 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Swal from "sweetalert2";
 import Spinner from "react-bootstrap/Spinner";
-import { useServer } from "../../AppContext.jsx";
+import { useServer } from "../AppContext.jsx";
 
 export default function LoginPage() {
   const [isFocused, setIsFocused] = useState(false);

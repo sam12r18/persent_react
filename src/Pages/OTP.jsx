@@ -7,7 +7,7 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import Spinner from "react-bootstrap/Spinner";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
-import { useServer } from "../../AppContext.jsx";
+import { useServer } from "../AppContext.jsx";
 import { useLocation } from "react-router-dom";
 
 export default function OTP() {

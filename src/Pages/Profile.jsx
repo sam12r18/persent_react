@@ -4,20 +4,33 @@ import Form from "react-bootstrap/Form";
 import { useState, useRef, useEffect } from "react";
 import Spinner from "react-bootstrap/Spinner";
 import { Link, useNavigate, } from "react-router-dom";
-import { useServer } from "../../AppContext.jsx";
+import { useServer } from "../AppContext.jsx";
 import axios from "axios";
 import Swal from "sweetalert2";
 import { useForm } from "react-hook-form";
+import DatePicker from "react-multi-date-picker";
+import persian from "react-date-object/calendars/persian";
+import persian_fa from "react-date-object/locales/persian_fa";
+import MapComponent from "../Components/MapComponent.jsx";
 
-export default function NewEmployee() {
+
+export default function Profile() {
     const [isFocused, setIsFocused] = useState(false);
     const [isFocused2, setIsFocused2] = useState(false);
     const [isFocused3, setIsFocused3] = useState(false);
+    const [isFocused4, setIsFocused4] = useState(false);
+    const [isFocused5, setIsFocused5] = useState(false);
+    const [isFocused6, setIsFocused6] = useState(false);
+    const [isFocused7, setIsFocused7] = useState(false);
     const [loading, setLoading] = useState(false);
     const [genderDropdown, setGenderDropdown] = useState(false);
     const dropdownRef = useRef(null);
     const navigate = useNavigate();
     const { serverAddress } = useServer();
+    const [selectedFileName, setSelectedFileName] = useState("");
+    const [imagePreview, setImagePreview] = useState(null);
+    const [selectedLocation, setSelectedLocation] = useState(null);
+
 
 
 
@@ -28,6 +41,7 @@ export default function NewEmployee() {
         watch,
         formState: { errors },
     } = useForm({ mode: "onChange" });
+    const startDate = watch("startDate");
 
     const selectedGender = watch("gender");
 
@@ -92,7 +106,7 @@ export default function NewEmployee() {
         <Container className="container-sm align-items-center justify-content-center mt-3">
             <div className="row">
                 <div className="d-flex justify-content-between mt-4">
-                    <span className="fs-5 fw-bold">ثبت کارمند جدید</span>
+                    <span className="fs-5 fw-bold">پروفایل کاربری</span> 
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="24"
@@ -110,7 +124,7 @@ export default function NewEmployee() {
 
                 <div className="mt-5 mb-5">
                     <Form onSubmit={handleSubmit(onSubmit)}>
-                        <Form.Group className="mb-5 position-relative">
+                        <Form.Group className="mb-4 position-relative">
                             <Form.Label
                                 className={`fs-6 py-2 px-2 rounded-4 position-absolute top-0 start-0 translate-middle-y ms-3 bg-white ${isFocused ? "text-orange" : "text-color"}`}
                                 style={{ zIndex: 2, pointerEvents: "none", whiteSpace: "nowrap" }}
@@ -126,8 +140,7 @@ export default function NewEmployee() {
                                 onBlur={() => setIsFocused(false)}
                             />
                         </Form.Group>
-
-                        <Form.Group className="mb-5 position-relative">
+                        <Form.Group className="mb-4 position-relative">
                             <div
                                 ref={dropdownRef}
                                 className="position-relative"
@@ -199,10 +212,126 @@ export default function NewEmployee() {
                             </div>
                             <input type="hidden" {...register("gender")} />
                         </Form.Group>
+                        <Form.Group className="mb-4 position-relative">
+                            <Form.Label
+                                className={`fs-6 py-2 px-2 rounded-4 position-absolute top-0 start-0 translate-middle-y ms-3 bg-white ${
+                                    isFocused3 ? "text-orange" : "text-color"
+                                }`}
+                                style={{ zIndex: 2, pointerEvents: "none", whiteSpace: "nowrap" }}
+                            >
+                                انتخاب عکس پروفایل
+                            </Form.Label>
 
+                            <Form.Control
+                                id="profilePhoto"
+                                type="file"
+                                accept="image/*"
+                                className="d-none"
+                                {...register("profilePhoto")}
+                                onFocus={() => setIsFocused3(true)}
+                                onBlur={() => setIsFocused3(false)}
+                                onChange={(e) => {
+                                    const file = e.target.files?.[0];
+                                    setSelectedFileName(file?.name || "");
+                                    if (file) {
+                                        const reader = new FileReader();
+                                        reader.onloadend = () => {
+                                            setImagePreview(reader.result);
+                                        };
+                                        reader.readAsDataURL(file);
+                                    } else {
+                                        setImagePreview(null);
+                                    }
+                                }}
+                            />
+
+                            <label
+                                htmlFor="profilePhoto"
+                                className="btn btn-outline-secondary rounded-5 py-3 w-100 fs-5"
+                                style={{ cursor: "pointer" }}
+                            >
+                                {selectedFileName || "انتخاب عکس پروفایل"}
+                            </label>
+                            {imagePreview && (
+                                <div className="mt-3 text-center">
+                                    <img 
+                                        src={imagePreview} 
+                                        alt="Preview" 
+                                        style={{ 
+                                            maxWidth: '200px', 
+                                            maxHeight: '200px',
+                                            borderRadius: '10px',
+                                            objectFit: 'cover'
+                                        }} 
+                                    />
+                                </div>
+                            )}
+                        </Form.Group>
+                        <Form.Group className="mb-4 position-relative" controlId="startDate">
+                            <Form.Label
+                                column="sm"
+                                className={`rounded-4  fs-6 py-2 px-2 ${
+                                    isFocused4 ? "text-orange" : "text-color"
+                                }`}
+                                {...register("birthDayDate")}
+                            >
+                                تاریخ تولد
+                            </Form.Label>
+                            <DatePicker
+                                inputClass="form-control  rounded-5 py-3 text-end w-100"
+                                calendar={persian}
+                                locale={persian_fa}
+                                value={startDate}
+                                onChange={(date) => setValue("startDate", date?.toDate?.() || null)}
+                                onFocus={() => setIsFocused4(true)}
+                                onBlur={() => setIsFocused4(false)}
+                                maxDate={new Date()}
+                                {...register("birthDayDate")}
+                            />
+                        </Form.Group>
+                        <Form.Group className="mb-4 position-relative">
+                            <Form.Label
+                                className={`fs-6 py-2 px-2 rounded-4 position-absolute top-0 start-0 translate-middle-y ms-3 bg-white ${isFocused5 ? "text-orange" : "text-color"}`}
+                                style={{ zIndex: 2, pointerEvents: "none", whiteSpace: "nowrap" }}
+                            >
+                                کد ملی
+                            </Form.Label>
+                            <Form.Control
+                                type="number"
+                                placeholder="اینجا بنویسید"
+                                className="rounded-5 py-3 no-arrows text-start fs-5"
+                                {...register("nationalCode")}
+                                onFocus={() => setIsFocused5(true)}
+                                onBlur={() => setIsFocused5(false)}
+                            />
+                        </Form.Group>
+                        <Form.Group className="mb-4 position-relative">
+                            <Form.Label
+                                className={`fs-6 py-2 px-2 rounded-4 position-absolute top-0 start-0 translate-middle-y ms-3 bg-white ${isFocused6 ? "text-orange" : "text-color"}`}
+                                style={{ zIndex: 2, pointerEvents: "none", whiteSpace: "nowrap" }}
+                            >
+                                نشانی منزل
+                            </Form.Label>
+                            <Form.Control
+                                type="text"
+                                placeholder="اینجا بنویسید"
+                                className="rounded-5 py-3 text-start fs-5"
+                                {...register("address")}
+                                onFocus={() => setIsFocused6(true)}
+                                onBlur={() => setIsFocused6(false)}
+                            />
+                            <div className="mt-3">
+                                <MapComponent 
+                                    onLocationSelect={(location) => {
+                                        setSelectedLocation(location);
+                                        setValue("address", `Lat: ${location.lat}, Lng: ${location.lng}`);
+                                    }}
+                                />
+                            </div>
+                        </Form.Group>
                         <Form.Group className="mb-3 mt-4 position-relative">
                             <Form.Label
-                                className={`rounded-4 fs-6 py-2 px-2 position-absolute top-0 start-0 translate-middle-y ms-3 bg-white ${isFocused3 ? "text-orange" : "text-color"}`}
+                                className={`rounded-4 fs-6 py-2 px-2 position-absolute top-0 start-0 translate-middle-y ms-3 bg-white ${isFocused7 ? "text-orange" : "text-color"}`}
                                 style={{ zIndex: 2, pointerEvents: "none", whiteSpace: "nowrap" }}
                             >
                                 شماره موبایل
@@ -211,12 +340,11 @@ export default function NewEmployee() {
                                 type="number"
                                 placeholder="اینجا بنویسید"
                                 className="rounded-5 py-3 no-arrows text-start fs-5"
-                                {...register("phonNumber")}
-                                onFocus={() => setIsFocused3(true)}
-                                onBlur={() => setIsFocused3(false)}
+                                {...register("phoneNumber")}
+                                onFocus={() => setIsFocused7(true)}
+                                onBlur={() => setIsFocused7(false)}
                             />
                         </Form.Group>
-
                         <Button
                             variant="primary"
                             type="submit"
@@ -225,10 +353,10 @@ export default function NewEmployee() {
                             {loading ? (
                                 <>
                                     <Spinner as="span" animation="border" size="sm" role="status" aria-hidden="true" className="me-2" />
-                                    در حال ثبت کارمند...
+                                    در حال ثبت ...
                                 </>
                             ) : (
-                                "ثبت کارمند"
+                                "ذخیره تغییرات"
                             )}
                         </Button>
 

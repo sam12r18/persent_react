@@ -2,7 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { Container, Image } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { useServer } from "../../AppContext.jsx";
+import { useServer } from "../AppContext.jsx";
 
 export default function InviteBox() {
   // const { data } = useParams();

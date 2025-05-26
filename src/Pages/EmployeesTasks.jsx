@@ -67,7 +67,7 @@ export default function EmployeesTasks() {
       <div className="row">
         <div className="d-flex mb-4 mt-2 justify-content-between">
           <div>
-            <span className="fs-5"> ایجاد تسک برای کارمندان </span>
+            <span className="fs-5"> ایجاد وظیفه برای کارمندان </span>
           </div>
           <div className="">
             <svg
@@ -104,13 +104,13 @@ export default function EmployeesTasks() {
                   to={"/add-task"}
                   className="btn btn-green text-nowrap rounded-4 text-white fs-7 me-2 px-2"
                 >
-                  ایجاد تسک
+                  ایجاد وظیفه
                 </Link>
                 <Link
-                  to={"/show-task"}
+                  to={"/view-task"}
                   className="btn btn-blue text-nowrap rounded-4 text-white fs-7 px-2"
                 >
-                   نمایش تسک 
+                   نمایش وظیفه 
                 </Link>
               </div>
             </div>
@@ -125,13 +125,13 @@ export default function EmployeesTasks() {
                   to={"/add-task"}
                   className="btn btn-green text-nowrap rounded-4 text-white fs-7 me-2 px-2"
                 >
-                  ایجاد تسک
+                  ایجاد وظیفه
                 </Link>
                 <Link
-                  to={"/show-task"}
+                  to={"/view-task"}
                   className="btn btn-blue text-nowrap rounded-4 text-white fs-7 px-2"
                 >
-                   نمایش تسک 
+                   نمایش وظیفه 
                 </Link>
               </div>
             </div>
@@ -146,13 +146,13 @@ export default function EmployeesTasks() {
                   to={"/add-task"}
                   className="btn btn-green text-nowrap rounded-4 text-white fs-7 me-2 px-2"
                 >
-                  ایجاد تسک
+                  ایجاد وظیفه
                 </Link>
                 <Link
-                  to={"/show-task"}
+                  to={"/view-task"}
                   className="btn btn-blue text-nowrap rounded-4 text-white fs-7 px-2"
                 >
-                   نمایش تسک 
+                   نمایش وظیفه 
                 </Link>
               </div>
             </div>

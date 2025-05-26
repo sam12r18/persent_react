@@ -4,12 +4,11 @@ import Form from "react-bootstrap/Form";
 import { useEffect, useState } from "react";
 import Spinner from "react-bootstrap/Spinner";
 import { Link, useNavigate } from "react-router-dom";
-import { useServer } from "../../AppContext.jsx";
+import { useServer } from "../AppContext.jsx";
 import axios from "axios";
 import Swal from "sweetalert2";
 import { useForm } from "react-hook-form";
-import Map from "../Map.jsx";
-import MapComponent from "../MapComponent.jsx";
+import MapComponent from "../Components/MapComponent.jsx";
 import { MapContainer, TileLayer, Marker, useMapEvents } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 

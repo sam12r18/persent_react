@@ -6,7 +6,7 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 import Swal from "sweetalert2";
 import Spinner from 'react-bootstrap/Spinner';
-import {useServer} from "../../AppContext.jsx";
+import {useServer} from "../AppContext.jsx";
 import {Link, useNavigate} from "react-router-dom";
 import { useLocation } from "react-router-dom";
 
