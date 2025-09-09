@@ -4,24 +4,49 @@ import { Link } from "react-router-dom";
 import {apiGet, apiPost} from "../services/AxiosClient.jsx";
 import useAlert from "../hook/Alert.jsx";
 import {useAuth} from "../Context/AuthContext.jsx";
+import { useNavigate } from "react-router-dom";
+
 export default function InviteBox() {
   const [invites, setInvites] = useState([]);
   const [companies, setCompanies] = useState([]);
+  const navigate = useNavigate();
   const alert = useAlert();
-    const {setCompanyData} = useAuth()
+  const {setCompanyData} = useAuth()
   const fetchData = async () => {
-        try {
-            const response = await apiGet(`suggest`, {});
-            const companies = await apiGet(`company`, {});
-            console.log("Thi is Data suggest:", response);
-            console.log("Thi is Data companies:", companies);
-            setInvites(response?.data)
-            setCompanies(companies?.data)
-        } catch (err) {
-            console.error("API error: ", err);
+      try {
+          const response = await apiGet(`suggest`, {});
+          const companiesRes = await apiGet(`company`, {});
 
-        }
+          console.log("Thi is Data suggest:", response);
+          console.log("Thi is Data companies:", companiesRes.data);
+
+          setInvites(response?.data);
+          setCompanies(companiesRes?.data);
+
+          // اینجا آرایه‌ی شرکت‌ها رو می‌گیری
+          const companies = companiesRes?.data;
+
+          if (companies && companies.length > 1) {
+              return "";
+          } else if (!invites && companies && companies.length === 1) {
+              const company = companies[0];
+              if (company?.role === "owner") {
+                  setTimeout(() => {
+                      navigate(`/admin`);
+                  }, 500);
+              } else {
+                  setTimeout(() => {
+                      navigate(`/employee`);
+                  }, 500);
+              }
+          }
+      } catch (err) {
+          console.error("API error: ", err);
+      }
+
   }
+
+
   useEffect(() => {
       fetchData();
   }, []);
@@ -117,7 +142,7 @@ export default function InviteBox() {
             <span className="fs-4 fw-bold ">
               کسب و کار خود را ایجاد کنید
             </span>
-          <Link to="/create-companies" className="btn fs-5 text-decoration-none text-white bg-orange rounded-4 p-3 fw-bold">
+          <Link to="/create-company" className="btn fs-5 text-decoration-none text-white bg-orange rounded-4 p-3 fw-bold">
             جهت ایجاد کسب و کار کلیک کنید
           </Link>
           </div>
