@@ -33,13 +33,10 @@ import AdminExitConfirmation from "./Pages/admin/AdminExitConfirmation.jsx";
 import EmployeeSuccessEntry from "./Pages/employe/EmployeeSuccessEntry.jsx";
 import AdminSuccessEntry from "./Pages/admin/AdminSuccessEntry.jsx";
 
-
-
 function App() {
     return (
         <>
             <AuthProvider>
-                <Router>
                     <Routes>
                         <Route path="/" element={<Navigate to={"/auth/login"}/> }/>
                         <Route path={"/auth"} element={<IndexAuth/>}>
@@ -77,7 +74,6 @@ function App() {
                         <Route path="/create-company" element={<CreateCompany/>}/>
                         {/*<Route path="*" element={<NotFound/>}/>*/}
                     </Routes>
-                </Router>
             </AuthProvider>
         </>
     );
