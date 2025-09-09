@@ -33,7 +33,7 @@ export default function EmployeeExitConfirmation() {
             const response = await apiPost(`attendance_check`,{company_id:company.id , lat:sendLocation.lat , lng:sendLocation.lng ,check:"check_in",device_id:'' , with_schedule:false} );
             console.log("this is response", response);
             setTimeout(()=>{
-                navigate('/employee/attendance-status')
+                navigate('/employee/attendance-status?status=exit')
             },500)
         }catch (error) {
             alert({

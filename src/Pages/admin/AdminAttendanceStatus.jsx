@@ -1,10 +1,12 @@
 import { Container, Image } from "react-bootstrap";
-import {Link} from "react-router-dom";
+import {Link, useSearchParams} from "react-router-dom";
 import {apiGet} from "../../services/AxiosClient.jsx";
 import {useEffect, useState} from "react";
 
 export default function AdminAttendanceStatus() {
     const [userClock,setUserClock] = useState('')
+    const [searchParams] = useSearchParams();
+    const status = searchParams.get("status");
     const fetchClock= async ()=>{
         try {
             const response = await apiGet(`datetime` );
@@ -20,9 +22,9 @@ export default function AdminAttendanceStatus() {
         <Container className={"container-sm mt-3"}>
             <Image src={"/img/Success.png"} className={"mx-auto d-flex"} />
             <div className={"mt-5 gap-2 d-flex align-items-center flex-column"}>
-                <span className={"fs-4 fw-bold"}>ورود شما با موفقیت ثبت شد</span>
+                <span className={"fs-4 fw-bold"}>{status === "enter" ? "ورود" : "خروج"} شما با موفقیت ثبت شد</span>
                 <span className={"text-color fs-7 "}>
-                    شما ورود خود را در{userClock} ثبت کردید
+                    شما {status === "enter" ? "ورود" : "خروج"} خود را در{userClock} ثبت کردید
                 </span>
             </div>
             <div className={"my-5"}>

@@ -31,7 +31,7 @@ export default function AdminExitConfirmation() {
             const response = await apiPost(`attendance_check`,{company_id:company.id , lat:sendLocation.lat , lng:sendLocation.lng ,check:"check_out",device_id:'' , with_schedule:false});
             console.log("this is response", response);
             setTimeout(() => {
-                navigate('/admin/attendance-status')
+                navigate('/admin/attendance-status?status=exit')
             }, 500)
         } catch (error) {
             alert({
