@@ -30,20 +30,10 @@ export default function LoginPage() {
               text:"خوش آمدید",
               icon: "success",
           });
-        const company = response?.companies;
-        if (company?.[0]?.role === "owner") {
-          setTimeout(() => {
-            navigate(`/admin`);
-          }, 500);
-        } else if (company?.[0]?.role === "employee") {
-          setTimeout(() => {
-            navigate(`/employee`);
-          }, 500);
-        }else{
-            setTimeout(() => {
-                navigate(`/invite-box`);
-            }, 500);
-        }
+        setTimeout(() => {
+            navigate(`/invite-box`);
+        }, 500);
+
     } catch (error) {
       console.error("Error:", error);
     } finally {
