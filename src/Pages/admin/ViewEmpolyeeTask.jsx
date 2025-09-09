@@ -1,11 +1,9 @@
 import { Container } from "react-bootstrap";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import Button from "react-bootstrap/Button";
-import Spinner from "react-bootstrap/Spinner";
 import axios from "axios";
 import Swal from "sweetalert2";
-import { useServer } from "../AppContext.jsx";
+import { useServer } from "../../AppContext.jsx";
 
 export default function ViewEmployeeTask() {
   const navigate = useNavigate();
@@ -15,7 +13,7 @@ export default function ViewEmployeeTask() {
 
   useEffect(() => {
     const getTasks = async () => {
-      const { data } = await axios.get("${serverAddress}", {
+      const { data } = await axios.get(``, {
         headers: {
           Authorization: `Bearer ${Token}`,
         },
@@ -29,9 +27,10 @@ export default function ViewEmployeeTask() {
 
   const deleteTask = async (id) => {
     try {
-      const response = await axios.post(`${serverAddress}/delete-task`, {task_id : id});
+      const response = await axios.post(`${serverAddress}/delete-task`, {
+        task_id: id,
+      });
       console.log("this is response for delete item :", response);
-      
 
       const Toast = Swal.mixin({
         toast: true,
@@ -49,7 +48,7 @@ export default function ViewEmployeeTask() {
         icon: "success",
         title: "کمی صبر کتید..",
       });
-      setDataTasks(prev=>prev.filter(item=> item?.id !== id));
+      setDataTasks((prev) => prev.filter((item) => item?.id !== id));
     } catch (error) {
       const Toast = Swal.mixin({
         toast: true,
@@ -104,12 +103,17 @@ export default function ViewEmployeeTask() {
                 <div className="col-12 my-3" key={item?.id}>
                   <div className="d-flex flex-column p-3 border-color rounded-4 bg-orange text-white ">
                     <div className="justify-content-between d-flex">
-                      <span className="fw-bold"> {item?.title??"نامشخص"}</span>
+                      <span className="fw-bold">
+                        {" "}
+                        {item?.title ?? "نامشخص"}
+                      </span>
                       <span className="fw-bold">{item?.id ?? "نامشخص"}</span>
                     </div>
                     <div className="justify-content-between d-flex mt-3">
                       <span className="fw-bold">مهلت انجام تا تاریخ:</span>
-                      <span className="fw-bold">{item?.dead_linde ?? "نامشخص"}</span>
+                      <span className="fw-bold">
+                        {item?.dead_linde ?? "نامشخص"}
+                      </span>
                     </div>
                     <div className="mt-3">
                       <p className="fs-6 text-justifyed">
@@ -134,6 +138,46 @@ export default function ViewEmployeeTask() {
                   </div>
                 </div>
               ))}
+          </div>
+        </div>
+        <div className="col-12">
+          <div className=" row flex-column gap-4">
+            <div className="col-12 my-3">
+              <div className="d-flex flex-column p-3 border-color rounded-4 bg-orange text-white ">
+                <div className="justify-content-between d-flex">
+                  <span className="fw-bold">وظیفه</span>
+                  <span className="fw-bold">#13</span>
+                </div>
+                <div className="justify-content-between d-flex mt-3">
+                  <span className="fw-bold">مهلت انجام تا تاریخ:</span>
+                  <span className="fw-bold">نامشخص</span>
+                </div>
+                <div className="mt-3">
+                  <p className="fs-6 text-justifyed">
+                    Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                    Omnis voluptates corporis obcaecati minus dolore laborum
+                    expedita, nulla vitae adipisci sapiente accusamus alias
+                    repellendus eaque, eos amet, quae assumenda! Itaque,
+                    laudantium?
+                  </p>
+                </div>
+                <div className="d-flex justify-content-end mt-3">
+                  <Link
+                    to={"/edit-task"}
+                    className="btn btn-blue text-white fs-6 rounded-3 mx-3"
+                  >
+                    ویرایش
+                  </Link>
+                  <button
+                    className="btn btn-red text-white fs-6 rounded-3"
+                    type="submit"
+                    onClick={() => deleteTask(item?.id)}
+                  >
+                    حذف
+                  </button>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
