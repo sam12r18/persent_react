@@ -1,8 +1,10 @@
 
 @font-face {
-  font-family: 'IRANSans';
-  src: url('./assets/fonts/IRANSansWeb.ttf') ;
-  font-style: normal;
+    font-family: "IRANSansWeb";
+    src: url("/assets/fonts/IRANSansWeb.woff2") format("woff2"),
+    url("/assets/fonts/IRANSansWeb.woff") format("woff");
+    font-weight: normal;
+    font-style: normal;
 }
 :root, [data-bs-theme="orange"] {
   --rs-input-bg-color-1: #FF8D4D;
@@ -39,6 +41,8 @@
   padding: 0;
 }
 
+
+
 body {
   direction: rtl;
   font-family: "IRANSans" !important;
@@ -53,6 +57,17 @@ input:focus  {
   box-shadow: 0px 0px 5px #FF7C32 !important;
   border-color: var(--rs-input-bg-color-1) !important;
 }
+input:focus,
+textarea:focus {
+    box-shadow: 0px 0px 5px #FF7C32 !important;
+    border-color: var(--rs-input-bg-color-1) !important;
+}
+
+input:active,
+textarea:active {
+    border-color: var(--rs-back-color-orange-1) !important;
+}
+
 .container{
   max-width: 425px !important;
 }
@@ -120,7 +135,7 @@ input:focus  {
   width: 71px;
   height: 71px;
 }
-.text-justifyed{
+.text-justify{
   text-align: justify;
 }
 .fs-7{

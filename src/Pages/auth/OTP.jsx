@@ -1,26 +1,20 @@
-import { Container, Image } from "react-bootstrap";
-import Button from "react-bootstrap/Button";
+import { Container } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
 import { useRef, useEffect, useState } from "react";
 import { useForm, Controller } from "react-hook-form";
-import axios from "axios";
-import Swal from "sweetalert2";
-import Spinner from "react-bootstrap/Spinner";
-import { Link, useNavigate, useSearchParams } from "react-router-dom";
-import { useServer } from "../AppContext.jsx";
-import { useLocation } from "react-router-dom";
-
+import {useNavigate } from "react-router-dom";
+import PageTitle from "../../Components/public/PageTitle.jsx";
+import CustomBtn from "../../Components/public/CustomBtn.jsx";
+import {apiPost} from "../../services/AxiosClient.jsx";
+import {useAuth} from "../../Context/AuthContext.jsx";
+import useAlert from "../../hook/Alert.jsx";
 export default function OTP() {
   const inputRefs = [useRef(), useRef(), useRef(), useRef()];
   const [loading, setLoading] = useState(false);
-  const [searchParams] = useSearchParams();
-  const mobile = searchParams.get("mobile");
-  const { serverAddress } = useServer();
   const navigate = useNavigate();
-  const location = useLocation();
-  const queryParams = new URLSearchParams(location.search);
-  const page = queryParams.get("page");
-
+  const alert = useAlert();
+  const {mobile} =useAuth()
+    console.log(mobile)
   const {
     control,
     handleSubmit,
@@ -38,64 +32,35 @@ export default function OTP() {
     }
 
     const otpCode = `${data.otp1}${data.otp2}${data.otp3}${data.otp4}`;
-    console.log(otpCode);
     try {
-      const response = await axios.post(
-        `${serverAddress}auth/check-opt/register`,
-        { code: otpCode, mobile: mobile }
+      const response = await apiPost(`auth/check-otp/register`, { code: otpCode, mobile: mobile }
       );
-      const token = response.data.token;
-      localStorage.setItem("authToken", token);
-      console.log("token is : ", localStorage.getItem("authToken"));  
-      const Toast = Swal.mixin({
-        toast: true,
-        position: "top-end",
-        showConfirmButton: false,
-        timer: 2000,
-        timerProgressBar: true,
-        didOpen: (toast) => {
-          toast.onmouseenter = Swal.stopTimer;
-          toast.onmouseleave = Swal.resumeTimer;
-        },
-      });
-      await Toast.fire({
-        icon: "success",
-        title: `${"ثبت نام شما با موفقیت انجام شد"}`,
-      });
-      console.log("Response:", response.data);
-      if (page === "register") {
+      console.log("this is response fo register" , response)
+      const token = response?.token;
+        console.log(token)
+      localStorage.setItem("authToken",token);
+        alert({
+            icon: "success",
+            title: "موفق",
+            text: "عملیات موفقیت آمیز بود",
+        });
         setTimeout(() => {
-          navigate(`/invite-box`);
+            navigate(`/invite-box`);
         }, 500);
-      } else {
-        setTimeout(() => {
-          navigate(`/new-password`);
-        }, 500);
-      }
-      
+
     } catch (error) {
-      const Toast = Swal.mixin({
-        toast: true,
-        position: "top-end",
-        showConfirmButton: false,
-        timer: 2000,
-        timerProgressBar: true,
-        didOpen: (toast) => {
-          toast.onmouseenter = Swal.stopTimer;
-          toast.onmouseleave = Swal.resumeTimer;
-        },
-      });
-      await Toast.fire({
-        icon: "error",
-        title: `${error.message}`,
-      });
+        alert({
+            icon: "error",
+            title: "خطا",
+            text: "مشکلی   پیش آمده است",
+        });
       console.error("Error:", error);
     } finally {
       setLoading(false);
     }
   };
 
-  const handleChange = (e, index, field) => {
+  const handleChange = (e, index) => {
     const value = e.target.value;
     const fieldName = `otp${index + 1}`;
 
@@ -131,27 +96,9 @@ export default function OTP() {
   }, []);
 
   return (
-    <Container
-      className="container-sm align-items-center justify-content-center mt-3"
-      dir="rtl"
-    >
-      <div className="row">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          fill="currentColor"
-          className="bi bi-arrow-left"
-          viewBox="0 0 16 16"
-          role="button"
-          style={{ cursor: "pointer" }}
-          onClick={() => navigate(-1)}
-        >
-          <path
-            fillRule="evenodd"
-            d="M15 8a.5.5 0 0 1-.5.5H2.707l3.147 3.146a.5.5 0 0 1-.708.708l-4-4a.5.5 0 0 1 0-.708l4-4a.5.5 0 1 1 .708.708L2.707 7.5H14.5a.5.5 0 0 1 .5.5z"
-          />
-        </svg>
+    <Container className="container-sm mt-3" dir="rtl">
+      <div className="d-flex flex-column">
+        <PageTitle title={"کد تایید ورود"}/>
         <div className="mt-5 d-flex flex-column">
           <span className="fs-4 fw-bold mb-3">کد تایید ورود</span>
           <span className="text-color mb-3">
@@ -159,10 +106,7 @@ export default function OTP() {
           </span>
         </div>
         <div className="mt-5 mb-5">
-          <Form
-            onSubmit={handleSubmit(onSubmit)}
-            className="d-flex flex-column"
-          >
+          <Form onSubmit={handleSubmit(onSubmit)} className="d-flex flex-column">
             <div className="d-flex align-items-center gap-4 justify-content-center">
               {inputRefs.map((ref, index) => (
                 <Form.Group
@@ -203,27 +147,7 @@ export default function OTP() {
                 </Form.Group>
               ))}
             </div>
-            <Button
-              variant="primary"
-              type="submit"
-              className="w-100 rounded-5 fs-6 input-color border border-color py-3"
-            >
-              {loading ? (
-                <>
-                  <Spinner
-                    as="span"
-                    animation="border"
-                    size="sm"
-                    role="status"
-                    aria-hidden="true"
-                    className="me-2"
-                  />
-                  در حال بررسی...
-                </>
-              ) : (
-                "بررسی کد"
-              )}
-            </Button>
+            <CustomBtn text={"بررسی کد"} loadingText={"درحال بررسی"}/>
           </Form>
         </div>
       </div>
