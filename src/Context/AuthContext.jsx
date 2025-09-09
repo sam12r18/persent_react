@@ -25,7 +25,10 @@ export const AuthProvider = ({ children }) => {
     // ---------- Location ----------
     const [location, setLocation] = useState(null);
     const [locationError, setLocationError] = useState(null);
-
+    const [sendLocation  , setSendLocation] = useState([]);
+    const setUserLocation = (data)=>{
+        setSendLocation(data);
+    }
     useEffect(() => {
         if (!navigator.geolocation) {
             setLocationError("مرورگر شما از موقعیت‌یابی پشتیبانی نمی‌کند.");
@@ -62,6 +65,8 @@ export const AuthProvider = ({ children }) => {
                 locationError,
                 setCompanyData,
                 company,
+                setUserLocation,
+                sendLocation
             }}
         >
             {children}

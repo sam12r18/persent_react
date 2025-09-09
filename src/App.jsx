@@ -30,8 +30,8 @@ import AdminProfile from "./Pages/admin/AdminProfile.jsx";
 import EmployeeProfile from "./Pages/employe/EmployeeProfile.jsx";
 import AdminEnterConfirmation from "./Pages/admin/AdminEnterConfirmation.jsx";
 import AdminExitConfirmation from "./Pages/admin/AdminExitConfirmation.jsx";
-import EmployeeSuccessEntry from "./Pages/employe/EmployeeSuccessEntry.jsx";
-import AdminSuccessEntry from "./Pages/admin/AdminSuccessEntry.jsx";
+import EmployeeAttendanceStatus from "./Pages/employe/EmployeeAttendanceStatus.jsx";
+import AdminAttendanceStatus from "./Pages/admin/AdminAttendanceStatus.jsx";
 
 
 
@@ -58,7 +58,7 @@ function App() {
                             <Route path="edit-task" element={<EditTask/>}/>
                             <Route path="enter-confirmation" element={<AdminEnterConfirmation/>}/>
                             <Route path="exit-confirmation" element={<AdminExitConfirmation/>}/>
-                            <Route path="success-entry" element={<AdminSuccessEntry/>}/>
+                            <Route path="attendance-status" element={<AdminAttendanceStatus/>}/>
                             <Route path="history" element={<History/>}/>
                             <Route path="employees" element={<EmployeesList/>}/>
                             <Route path="new-employees" element={<NewEmployee/>}/>
@@ -71,7 +71,7 @@ function App() {
                             <Route path="profile" element={<EmployeeProfile/>}/>
                             <Route path="enter-confirmation" element={<EnterConfirmation/>}/>
                             <Route path="exit-confirmation" element={<ExitConfirmation/>}/>
-                            <Route path="success-entry" element={<EmployeeSuccessEntry/>}/>
+                            <Route path="attendance-status" element={<EmployeeAttendanceStatus/>}/>
                         </Route>
                         <Route path="/invite-box" element={<InviteBox/>}/>
                         <Route path="/create-company" element={<CreateCompany/>}/>

@@ -30,8 +30,8 @@ const fallbackIcons = {
 export default function MapComponent({ customHeight, onAddressSelect }) {
     const mapContainerRef = useRef(null);
     const markerRef = useRef(null);
-    const { location } = useAuth(); // لوکیشن خودکار کاربر
-
+    const { location , setUserLocation} = useAuth(); // لوکیشن خودکار کاربر
+    setUserLocation(location)
     useEffect(() => {
         if (!location) return; // تا وقتی لوکیشن آماده نیست کاری نکن
 
