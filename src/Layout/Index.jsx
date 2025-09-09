@@ -1,9 +1,9 @@
 
 import {Container} from "react-bootstrap";
 
-import Register from "../Pages/Register.jsx";
-import LoginPage from "../Pages/Login.jsx";
-const Inedex = () => {
+import Register from "../Pages/auth/Register.jsx";
+import LoginPage from "../Pages/auth/Login.jsx";
+const Index = () => {
 
 
 
@@ -14,4 +14,4 @@ const Inedex = () => {
 
     )
 }
-export default Inedex;
+export default Index;
