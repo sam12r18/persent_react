@@ -50,7 +50,7 @@ export default function Register() {
         <Container className="container-sm align-items-center justify-content-center mt-3">
             <div className="d-flex flex-column">
                 <PageTitle title={"ایجاد حساب کاربری"}/>
-                <Image src="/img/Header.png" className="mx-auto" style={{width:'215px' , height:'246px'}} />
+                <Image src="/img/Header.png" className="mx-auto" style={{width:'100px'}} />
                 <div>
                     <Form onSubmit={handleSubmit(onSubmit)}>
                         <CustomInputs type={"tel"} placeHolder={"0912"} label={"موبایل"} post={"mobile"} register={register} errors={errors} isRequired={true} requiredMessage={"وارد کردن شماره تلفن الزامی است"} pattern={{value: /^09\d{9}$/, message: "شماره موبایل باید با 09 شروع بشه و 11 رقم باشه",}} minLength={{value: 11, message: "شماره موبایل باید 11 رقم باشه",}} maxLength={{value: 11, message: "شماره موبایل باید 11 رقم باشه",}}/>
@@ -59,14 +59,14 @@ export default function Register() {
                         <CustomInputs type={"password"} placeHolder={"*********"} label={"تکرار رمز عبور"} post={"password_confirmation"} register={register} errors={errors} isRequired={true} requiredMessage={"وارد کردن رمز عبور الزامی است"}/>
                         <CustomInputs type={"number"} placeHolder={""} label={"کد معرف"} post={"ref_code"} register={register} errors={errors}/>
                         <span className="ps-3 d-block mb-4">
-                            ثبت نام در حضور و غیاب رایاسان به منزله
+                            ثبت نام در رایاحضور به منزله
                             <Link to={"/auth/terms"}  state={{ from: location.pathname }}> پذیرش قوانین و مقررات </Link>این برنامه می‌باشد
                         </span>
                         <CustomBtn text={"ثبت نام"} loadingText={"درحال ارسال.."}/>
                     </Form>
                 </div>
                 <div className="my-4">
-                    <Image src="img/raayasun.png" width="30px" height="30px"/>
+                    <Image src="/img/raayasun.png" width="30px" height="30px"/>
                     <Link to={"https://raayasun.ir/"}  className="text-decoration-none text-color me-2">
                         رایاسان پردازان پارت
                     </Link>

@@ -1,37 +1,30 @@
 
-@font-face {
-    font-family: "IRANSansWeb";
-    src: url("/assets/fonts/IRANSansWeb.woff2") format("woff2"),
-    url("/assets/fonts/IRANSansWeb.woff") format("woff");
-    font-weight: normal;
-    font-style: normal;
-}
 :root, [data-bs-theme="orange"] {
-  --rs-input-bg-color-1: #FF8D4D;
-  --rs-input-bg-color-2: #F87C47;
+  --rs-input-bg-color-1: #fd7d27;
+  --rs-input-bg-color-2: #fb711a;
   --rs-back-color: #FF8D4C;
-  --rs-back-color-orange-1: #FF7C32;
-  --rs-back-color-orange-2: #F38556;
+  --rs-back-color-orange-1: #fd7d27;
+  --rs-back-color-orange-2: #fb711a;
 }
 
 :root, [data-bs-theme="gray"] {
   --rs-color-gray: #B6B6B6;
   --rs-color--dark-gray: #757575;
   --rs-color-bg-gray: #D9D9D9;
-  --rs-input-color-1: #BFBFBF;
-  --rs-input-color-2: #7A7A7A;
+  --rs-input-color-1: #7A7A7A;
+  --rs-input-color-2: #49454F;
   --rs-text-color: #49454F;
 
 }
 :root, [data-bs-theme="green"] {
-  --rs-color-green: #62C271;
+  --rs-color-green: #0e6e1d;
 }
 :root, [data-bs-theme="red"] {
-  --rs-color-red: #C26262;
-  --rs-bg-color-red: #EE4866;
+  --rs-color-red: #EF5350;
+  --rs-bg-color-red: #EF5350;
 }
 :root, [data-bs-theme="yellow"] {
-  --rs-color-yellow: #EEA248;
+  --rs-color-yellow: #FFEE58;
 }
 :root, [data-bs-theme="blue"] {
   --rs-color-blue: #6294C2;

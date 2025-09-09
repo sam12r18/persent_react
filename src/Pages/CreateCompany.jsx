@@ -77,7 +77,7 @@ export default function CreateCompany() {
               <MapComponent onAddressSelect={({ address, lat, lng }) => {setValue("address", address);setValue("lat", lat);setValue("lng", lng); setCustomMarker([lat, lng]);}} />
             </div>
             <CustomBtn text={"ثبت کسب و کار من"} loadingText={"درحال ثبت.."}/>
-            <Link to={"/invite-box"} className="btn bg-smooth-gray mt-3 w-100 text-white fs-5 rounded-5 my-2 p-3">
+            <Link to={"/invite-box"} className="btn bg-smooth-gray mt-3 w-100 text-white fs-5 rounded-4 my-2 p-3">
               بازگشت
             </Link>
           </Form>

@@ -3,8 +3,8 @@ import { useState, useEffect } from "react";
 import "leaflet/dist/leaflet.css";
 import {Link, useNavigate,useLocation,} from "react-router-dom";
 import MapComponent from "../../Components/MapComponent.jsx";
-import PersentMap from "../../Components/public/PersentMap.jsx"; // ضروری برای رندر نقشه
-
+import PersentMap from "../../Components/public/PersentMap.jsx";
+import MinBtn from "../../Components/public/MinBtn.jsx"; // ضروری برای رندر نقشه
 export default function EmployeeDashboard() {
     const [customMarker, setCustomMarker] = useState(null);
 
@@ -35,9 +35,7 @@ export default function EmployeeDashboard() {
                             </span>
                         </div>
                         <div className="d-flex align-items-end">
-                            <Link to={"/employee/profile"}  className="btn bg-yellow text-nowrap rounded-4 text-white fs-7">
-                                تکمیل اطلاعات حساب
-                            </Link>
+                            <MinBtn bgColor={"bg-yellow"} to={"/employee/profile"} text={"تکمیل اطلاعات حساب"} textColor={"text-black"}/>
                         </div>
                     </div>
                     <div className="row justify-content-around gap-2">

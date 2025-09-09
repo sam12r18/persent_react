@@ -44,12 +44,11 @@ export default function LoginPage() {
   return (
     <Container className="container-sm align-items-center justify-content-center mt-3">
       <div className="d-flex flex-column">
-        <Image src="/img/Header.png" className="mx-auto" style={{width:'215px' , height:'246px'}} />
-        <div className="my-4 ms-3">
-          <span className="fs-4 fw-bold">حضورغیاب</span>
-          <p className="mt-3 text-color">
-            شماره موبایل خود را جهت بررسی وارد کنید
-          </p>
+        <Image src="/img/Header.png" className="mx-auto" style={{width:'100px'}} />
+        <div className="ms-3">
+          <span className="fs-4 fw-bold">رایاحضور</span>
+          <p className="mt-2 mb-0">
+به برنامه حضور و غیاب آنلاین رایاحضور خوش آمدید          </p>
         </div>
         <div>
           <Form onSubmit={handleSubmit(onSubmit)}>
@@ -67,7 +66,7 @@ export default function LoginPage() {
           </Link>
         </div>
         <div className="mt-3 mb-3">
-          <Image src="img/Rayasan.png" width="30px" height="30px" />
+          <Image src="/img/raayasun.png" width="30px" height="30px" />
           <Link to={"https://raayasun.ir/"} className="text-decoration-none text-color me-2">
               رایاسان پردازان پارت
           </Link>
