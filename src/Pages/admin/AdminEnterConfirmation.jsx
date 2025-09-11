@@ -5,8 +5,8 @@ import { Link, useNavigate, } from "react-router-dom";
 import PageTitle from "../../Components/public/PageTitle.jsx";
 import {apiGet, apiPost} from "../../services/AxiosClient.jsx";
 import useAlert from "../../hook/Alert.jsx";
-import PersentMap from "../../Components/public/PersentMap.jsx";
 import {useAuth} from "../../Context/AuthContext.jsx";
+import PresentMap from "../../Components/public/PresentMap.jsx";
 
 export default function AdminEnterConfirmation() {
     const navigate = useNavigate();
@@ -49,7 +49,7 @@ export default function AdminEnterConfirmation() {
     return (
         <Container className="container-sm mt-3">
                <PageTitle title={"تایید ورود به شرکت"}/>
-                <PersentMap/>
+                <PresentMap/>
                <div className={"p-2"}>
                     <span className={"fs-5 fw-bold text-justify d-block mb-3"}>
                         شما درحال تایید ورود به شرکت {company?.name} در {userClock} می‌باشید

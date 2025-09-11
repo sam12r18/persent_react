@@ -27,7 +27,7 @@ const fallbackIcons = {
     origin: "https://api.iconify.design/mdi:map-marker.svg?color=%23009688",
 };
 
-export default function MapComponent({ customHeight, onAddressSelect }) {
+export default function PresentMap({ customHeight, onAddressSelect }) {
     const mapContainerRef = useRef(null);
     const markerRef = useRef(null);
     const { location , setUserLocation} = useAuth(); // لوکیشن خودکار کاربر
