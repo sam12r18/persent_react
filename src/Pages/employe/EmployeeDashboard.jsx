@@ -1,13 +1,26 @@
 import { Container } from "react-bootstrap";
 import { useState, useEffect } from "react";
 import "leaflet/dist/leaflet.css";
-import {Link, useNavigate,useLocation,} from "react-router-dom";
-import MapComponent from "../../Components/MapComponent.jsx";
 import PersentMap from "../../Components/public/PersentMap.jsx";
 import MinBtn from "../../Components/public/MinBtn.jsx"; // ضروری برای رندر نقشه
-export default function EmployeeDashboard() {
-    const [customMarker, setCustomMarker] = useState(null);
+import {Link} from "react-router-dom";
+import {apiGet} from "../../services/AxiosClient.jsx"; // ضروری برای رندر نقشه
 
+export default function EmployeeDashboard() {
+    const [status , setStatus] = useState([])
+    const fetchStatus = async ()=>{
+        try {
+            const response = await apiGet(`status` );
+            console.log("this is response for status" ,response)
+            setStatus(response?.data)
+
+        }catch (error) {
+            console.log(error)
+        }
+    }
+    useEffect(() => {
+        fetchStatus();
+    }, []);
     return (
         <Container className="container-sm mt-3">
             <div className="d-flex flex-column">
@@ -38,37 +51,22 @@ export default function EmployeeDashboard() {
                             <MinBtn bgColor={"bg-yellow"} to={"/employee/profile"} text={"تکمیل اطلاعات حساب"} textColor={"text-black"}/>
                         </div>
                     </div>
-                    <div className="row justify-content-around gap-2">
-                        <div className="col-5 bg-orange rounded-4 p-3">
-                            <span className="text-white mb-3 fs-4 fw-bold d-block">
-                                ثبت خروج
-                            </span>
-                            <span className="fs-7 text-white">
-                                جهت خروج از محل کار کلیک کنید
-                            </span>
-                            <div className="justify-content-end d-flex">
-                                <Link to={"/employee/exit-confirmation"}  className="btn btn-red rounded-4 ">
-                                    خروج
-                                </Link>
-                            </div>
-                        </div>
-                        <div className="col-5 bg-orange rounded-4 p-3">
-                            <span className="text-white fs-4 fw-bold d-block mb-3">
-                                ثبت حضور
-                            </span>
-                            <span className="fs-7 text-white">
-                                جهت اعلام حضور کلیک فرمایید
-                            </span>
-                            <div className="justify-content-end d-flex">
-                                <Link to={"/employee/enter-confirmation"} className={"btn btn-green text rounded-4"}>
-                                    ورود
-                                </Link>
-                            </div>
+                    <div className="bg-orange rounded-4 p-3">
+                        <span className="text-white mb-2 fs-4 fw-bold d-block">
+                            {status?.last_status === "check_in" ? "ثبت حضور" : "ثبت خروج"}
+                        </span>
+                        <span className="text-white">
+                            جهت {status?.last_status === "check_in" ? "خروج از محل کار" : "ورود به محل کار"} کلیک کنید
+                        </span>
+                        <div className="justify-content-end d-flex">
+                            <Link to={`/employee/${status?.last_status === "check_in" ? "exit-confirmation" : "enter-confirmation"}`}  className={`btn ${status?.last_status === "check_in" ? "btn-red" : "btn-green"} rounded-4 text-white `}>
+                                {status?.last_status === "check_in" ? "خروج" : "ورود"}
+                            </Link>
                         </div>
                     </div>
                     <div className="d-flex flex-column">
                         <span className="fs-5 fw-bold text-color mt-3 mb-2">موقعیت شما</span>
-                        <PersentMap onAddressSelect={({ address, lat, lng }) => {setCustomMarker([lat, lng]);}} />
+                        <PersentMap />
                     </div>
                     <div className="d-flex bg-orange justify-content-between rounded-4 p-3">
                         <div>
