@@ -1,6 +1,8 @@
 import { Container } from "react-bootstrap";
 import { useState, useEffect } from "react";
 import "leaflet/dist/leaflet.css";
+import MapComponent from "../../Components/MapComponent.jsx";
+import MinLink from "../../Components/public/MinLink.jsx"; // ضروری برای رندر نقشه
 import {Link} from "react-router-dom";
 import PersentMap from "../../Components/public/PersentMap.jsx";
 import {apiGet} from "../../services/AxiosClient.jsx"; // ضروری برای رندر نقشه
@@ -47,9 +49,7 @@ export default function AdminDashboard() {
                             </span>
                         </div>
                         <div className="d-flex align-items-end">
-                            <Link to={"/admin/profile"}  className="btn bg-yellow text-nowrap rounded-4 text-white fs-7">
-                                تکمیل اطلاعات حساب
-                            </Link>
+                            <MinLink bgColor={"bg-yellow"} to={"/admin/profile"} text={"تکمیل اطلاعات حساب"} textColor={"text-black"}/>
                         </div>
                     </div>
                     <div className="bg-orange rounded-4 p-3">

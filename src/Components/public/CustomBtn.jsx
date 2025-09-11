@@ -8,7 +8,7 @@ export default function CustomBtn({text,loadingText}){
         <Button
             variant="primary"
             type="submit"
-            className="w-100 rounded-5 fs-6 input-color border border-color py-3"
+            className="w-100 rounded-4 fs-6 input-color border border-color py-3"
             disabled={loading}
         >
             {loading ? (

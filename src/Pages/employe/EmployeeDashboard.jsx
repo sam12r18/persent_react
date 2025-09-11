@@ -1,8 +1,9 @@
 import { Container } from "react-bootstrap";
 import { useState, useEffect } from "react";
 import "leaflet/dist/leaflet.css";
+import PresentMap from "../../Components/public/PersentMap.jsx";
+import MinLink from "../../Components/public/MinLink.jsx"; // ضروری برای رندر نقشه
 import {Link} from "react-router-dom";
-import PersentMap from "../../Components/public/PersentMap.jsx";
 import {apiGet} from "../../services/AxiosClient.jsx"; // ضروری برای رندر نقشه
 
 export default function EmployeeDashboard() {
@@ -47,9 +48,7 @@ export default function EmployeeDashboard() {
                             </span>
                         </div>
                         <div className="d-flex align-items-end">
-                            <Link to={"/employee/profile"}  className="btn bg-yellow text-nowrap rounded-4 text-white fs-7">
-                                تکمیل اطلاعات حساب
-                            </Link>
+                            <MinLink bgColor={"bg-yellow"} to={"/employee/profile"} text={"تکمیل اطلاعات حساب"} textColor={"text-black"}/>
                         </div>
                     </div>
                     <div className="bg-orange rounded-4 p-3">
@@ -67,7 +66,7 @@ export default function EmployeeDashboard() {
                     </div>
                     <div className="d-flex flex-column">
                         <span className="fs-5 fw-bold text-color mt-3 mb-2">موقعیت شما</span>
-                        <PersentMap />
+                        <PresentMap />
                     </div>
                     <div className="d-flex bg-orange justify-content-between rounded-4 p-3">
                         <div>

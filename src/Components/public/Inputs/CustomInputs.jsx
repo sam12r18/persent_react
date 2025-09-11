@@ -28,7 +28,7 @@ export default function CustomInputs({
                 as={as || "input"} // اگر textarea بود، textarea میشه وگرنه input
                 {...(as === "textarea" ? { rows } : { type })} // اینجا دیگه تداخل نداری
                 placeholder={placeHolder}
-                className={`rounded-5 py-3 mt-4 mb-4 ${
+                className={`rounded-4 py-3 mt-4 mb-4 ${
                     number ? "text-end" : "text-start"
                 }`}
                 {...register(`${post}`, {

@@ -43,7 +43,7 @@ export default function ForgotPassword() {
             <div className="d-flex flex-column">
                 <PageTitle title={"فراموشی رمز عبور"}/>
                 <div className=" d-flex flex-column gap-2 p-2">
-                    <span className="fs-4 fw-bold">رمزعبورم را فراموش کرده ام !</span>
+                    <span className="fs-4 fw-bold">رمزعبورم خود را فراموش کرده اید !</span>
                     <span className="text-color">
                         شماره موبایل خود را جهت بازیابی رمز عبز وارد کنید.
                     </span>
