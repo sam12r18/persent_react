@@ -84,7 +84,7 @@ export default function AdminDashboard() {
                             <Link to={"/admin/new-employees"}  className="btn btn-green text-nowrap rounded-4 text-white fs-7">
                                 افزودن
                             </Link>
-                            <Link to={"/admin/employees"}  className="btn bg-yellow text-nowrap rounded-4 text-white fs-7">
+                            <Link to={"/admin/employees"}  className="btn bg-yellow text-nowrap rounded-4 text-black fs-7">
                                 نمایش
                             </Link>
                         </div>

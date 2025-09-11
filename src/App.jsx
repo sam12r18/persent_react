@@ -25,20 +25,21 @@ import IndexAuth from "./Pages/auth/IndexAuth.jsx";
 import IndexAdmin from "./Pages/admin/IndexAdmin.jsx";
 import IndexEmployee from "./Pages/employe/IndexEmployee.jsx";
 import OtpResetPassword from "./Pages/auth/OtpResetPassword.jsx";
-import {AuthProvider} from "./Context/AuthContext.jsx";
+import {AuthProvider, useAuth} from "./Context/AuthContext.jsx";
 import AdminProfile from "./Pages/admin/AdminProfile.jsx";
 import EmployeeProfile from "./Pages/employe/EmployeeProfile.jsx";
 import AdminEnterConfirmation from "./Pages/admin/AdminEnterConfirmation.jsx";
 import AdminExitConfirmation from "./Pages/admin/AdminExitConfirmation.jsx";
 import EmployeeAttendanceStatus from "./Pages/employe/EmployeeAttendanceStatus.jsx";
 import AdminAttendanceStatus from "./Pages/admin/AdminAttendanceStatus.jsx";
+import ViewEmployeeTask from "./Pages/admin/ViewEmpolyeeTask.jsx";
 
 function App() {
+    const {isLoggedIn} = useAuth();
     return (
         <>
-            <AuthProvider>
                     <Routes>
-                        <Route path="/" element={<Navigate to={"/auth/login"}/> }/>
+                        <Route path="/" element={!isLoggedIn ?<LoginPage/> : <Navigate to={"/invite-box"}/> }/>
                         <Route path={"/auth"} element={<IndexAuth/>}>
                             <Route path={"login"} element={<LoginPage/>}/>
                             <Route path={"register"} element={<Register/>}/>
@@ -51,6 +52,7 @@ function App() {
                         <Route path={"/admin"} element={<IndexAdmin/>}>
                             <Route index element={<AdminDashboard/>}/>
                             <Route path="employees-tasks" element={<EmployeesTasks/>}/>
+                            <Route path="view-employees-task" element={<ViewEmployeeTask/>}/>
                             <Route path="add-task" element={<AddTask/>}/>
                             <Route path="edit-task" element={<EditTask/>}/>
                             <Route path="enter-confirmation" element={<AdminEnterConfirmation/>}/>
@@ -74,7 +76,6 @@ function App() {
                         <Route path="/create-company" element={<CreateCompany/>}/>
                         {/*<Route path="*" element={<NotFound/>}/>*/}
                     </Routes>
-            </AuthProvider>
         </>
     );
 }

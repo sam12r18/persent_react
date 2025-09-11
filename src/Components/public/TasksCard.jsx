@@ -1,4 +1,6 @@
-export default function TasksCard({data , endTask , needMoreTime}){
+import {Link} from "react-router-dom";
+
+export default function TasksCard({data , endTask , needMoreTime , isAdmin=false}){
     return (
         <>
             {data.map((item, index) => (
@@ -19,15 +21,18 @@ export default function TasksCard({data , endTask , needMoreTime}){
                     </div>
 
                     <p className="fs-6 text-justifyed">{item?.description}</p>
-
                     <div className="d-flex justify-content-end">
                         <button className="btn btn-green px-3 py-2 text-white fs-6 rounded-4" type="button" onClick={() => endTask(item?.id)}>
                             اتمام
                         </button>
-
                         <button className="btn btn-blue px-3 py-2 text-white fs-6 rounded-4 ms-2" type="button" onClick={() => needMoreTime(item?.id)}>
                             نیازمند زمان
                         </button>
+                        {isAdmin && (
+                            <Link to={`/admin/edit-task?id=${item?.id}`} className="btn btn-red px-3 py-2 text-white fs-6 rounded-4 ms-2" type="button">
+                                ویرایش
+                            </Link>
+                        )}
                     </div>
                 </div>
             ))}

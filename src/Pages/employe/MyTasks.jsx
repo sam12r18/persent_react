@@ -26,29 +26,16 @@ export default function MyTasks() {
             cancelButtonText: "خیر، لغو کن",
         }).then((result) => {
             if (result.isConfirmed) {
-                apiPost("", { task_id: id })
-                    .then(() => {
-                        alert({
-                            title: "موفقیت",
-                            text: `وظیفه شما به اتمام رسید`,
-                            icon: "success",
-                        });
-                    })
-                    .catch((err) => {
-                        alert({
-                            icon: "error",
-                            title: "خطا",
-                            text:
-                                err?.response?.data?.message ||
-                                "خطای ناشناخته‌ای رخ داد",
-                        });
+                try {
+                    apiPost(``, { task_id: id })
+                    alert({
+                        title: "موفقیت",
+                        text: `وظیفه شما به اتمام رسید`,
+                        icon: "success",
                     });
-            } else if (result.dismiss === "cancel") {
-                alert({
-                    title: "لغو شد",
-                    text: "هیچ تغییری در وضعیت وظیفه ایجاد نشد",
-                    icon: "error",
-                });
+                }catch (error) {
+                    console.log(error)
+                }
             }
         });
     }

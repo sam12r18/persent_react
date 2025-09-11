@@ -40,19 +40,17 @@ instance.interceptors.response.use(
 
 
         const warning = error;
-        // if (status === 401) {
-        //     localStorage.removeItem("authToken");
-        //     localStorage.removeItem("role");
-        //     localStorage.removeItem("avatar");
-        //     localStorage.removeItem("full_name");
-        //
-        //     setTimeout(() => {
-        //         window.location.href = "/";
-        //     }, 300);
-        //
-        //
-        //     return  console.log("logout completed");
-        // }
+        if (status === 401) {
+            localStorage.removeItem("authToken");
+            localStorage.removeItem("role");
+            localStorage.removeItem("avatar");
+            setTimeout(() => {
+                window.location.href = "/";
+            }, 300);
+
+
+            return  console.log("logout completed");
+        }
         console.error("خطای API:", rawMessage);
        if (status === 500){
            Swal.fire({

@@ -4,6 +4,7 @@ import { BrowserRouter } from "react-router-dom";
 import App from "./App.jsx";
 import "./app.css";
 import { registerSW } from "virtual:pwa-register";
+import {AuthProvider} from "./Context/AuthContext.jsx";
 
 // رجیستر کردن سرویس‌ورکر PWA
 const updateSW = registerSW({
@@ -20,7 +21,9 @@ const updateSW = registerSW({
 createRoot(document.getElementById("root")).render(
     <StrictMode>
         <BrowserRouter>
-            <App />
+            <AuthProvider>
+                <App/>
+            </AuthProvider>
         </BrowserRouter>
     </StrictMode>
 );
