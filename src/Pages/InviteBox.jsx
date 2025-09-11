@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { apiGet, apiPost } from "../services/AxiosClient.jsx";
 import useAlert from "../hook/Alert.jsx";
 import { useAuth } from "../Context/AuthContext.jsx";
+import MinBtn from "../Components/public/MinBtn.jsx";
 
 export default function InviteBox() {
     const [invites, setInvites] = useState([]);
@@ -107,12 +108,9 @@ export default function InviteBox() {
                         <div key={invite.id} className="d-flex bg-orange justify-content-between rounded-4 p-3 mt-3">
                             <span className="text-white fs-5 fw-bold">{invite.name}</span>
                             <div className="d-flex gap-3">
-                                <button
-                                    onClick={() => handleSuggested(invite.id, "accept", invite.name)}
-                                    className="btn rounded-5 text-white btn-green"
-                                >
-                                    تایید
-                                </button>
+                                <MinBtn
+                                    onClick={() => handleSuggested(invite.id, "accept", invite.name)} text={"تایید"}
+                                />
                                 <button
                                     onClick={() => handleSuggested(invite.id, "reject", invite.name)}
                                     className="btn rounded-5 text-white btn-red"
