@@ -6,29 +6,53 @@ export const AuthProvider = ({ children }) => {
     // ---------- Auth ----------
     const [mobile, setMobile] = useState("");
     const [hash, setHash] = useState("");
-    const [isLoggedIn, setIsLoggedIn] = useState(false); // ← mount اولیه false
-    const [loadingAuth, setLoadingAuth] = useState(true); // ← برای جلوگیری از redirect اشتباه
-    const [company, setCompany] = useState({});
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [loadingAuth, setLoadingAuth] = useState(true);
+
+    // مقدار اولیه company از localStorage
+    const [company, setCompany] = useState(() => {
+        const stored = localStorage.getItem("companyData");
+        return stored ? JSON.parse(stored) : {};
+    });
 
     useEffect(() => {
         const token = localStorage.getItem("authToken");
         setIsLoggedIn(!!token);
-        setLoadingAuth(false); // ← وقتی localStorage آماده شد
+        setLoadingAuth(false);
     }, []);
+
+    // هر بار که company تغییر کنه، توی localStorage هم ذخیره میشه
+    useEffect(() => {
+        if (company && Object.keys(company).length > 0) {
+            localStorage.setItem("companyData", JSON.stringify(company));
+        } else {
+            localStorage.removeItem("companyData");
+        }
+    }, [company]);
 
     const setPasswordHash = (hash) => setHash(hash);
     const setUserMobile = (mobile) => setMobile(mobile);
-    const setCompanyData = (data)=>{
-        setCompany(data);
-    }
+
+    const setCompanyData = (data) => {
+        setCompany(data); // هم state آپدیت میشه هم useEffect ذخیره میکنه
+    };
 
     // ---------- Location ----------
     const [location, setLocation] = useState(null);
     const [locationError, setLocationError] = useState(null);
-    const [sendLocation  , setSendLocation] = useState([]);
-    const setUserLocation = (data)=>{
+    const [sendLocation, setSendLocation] = useState([]);
+
+    const setUserLocation = (data) => {
         setSendLocation(data);
-    }
+    };
+    useEffect(() => {
+        if (sendLocation && Object.keys(sendLocation).length > 0) {
+            localStorage.setItem("location", JSON.stringify(sendLocation));
+        } else {
+            localStorage.removeItem("location");
+        }
+    }, [sendLocation]);
+
     useEffect(() => {
         if (!navigator.geolocation) {
             setLocationError("مرورگر شما از موقعیت‌یابی پشتیبانی نمی‌کند.");
@@ -58,7 +82,7 @@ export const AuthProvider = ({ children }) => {
                 mobile,
                 hash,
                 isLoggedIn,
-                loadingAuth, // ← اضافه شد
+                loadingAuth,
                 setUserMobile,
                 setPasswordHash,
                 location,
@@ -66,7 +90,7 @@ export const AuthProvider = ({ children }) => {
                 setCompanyData,
                 company,
                 setUserLocation,
-                sendLocation
+                sendLocation,
             }}
         >
             {children}

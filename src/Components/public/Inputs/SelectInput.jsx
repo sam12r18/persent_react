@@ -25,9 +25,9 @@ export default function SelectInput({
 
     return (
         <>
-            <FloatingLabel controlId={`floating-${post}`} label={label} className={`mb-4 w-100 rounded-4`}>
+            <FloatingLabel controlId={`floating-${post}`} label={label} className={`mb-4 w-100 rounded-3`}>
                 <Form.Select
-                    className={`${custom_class} rounded-5`}
+                    className={`${custom_class} rounded-4`}
                     {...register(post, {
                         ...(is_required && { required: message }),
                     })}

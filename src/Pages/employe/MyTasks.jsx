@@ -39,12 +39,9 @@ export default function MyTasks() {
             }
         });
     }
-    const needMoreTime = async (id)=>{
-        const response = await apiPost(``, {
-            task_Id:id
-        });
-    }
-
+const updatePage = async ()=>{
+        fetchData();
+}
     const myTasks = [
         {
             id:1,
@@ -71,7 +68,7 @@ export default function MyTasks() {
   return (
     <Container className="container-sm mt-3" style={{ direction: "rtl" }}>
         <PageTitle title={"لیست وظیفه های من"}/>
-        <TasksCard data={myTasks} endTask={endTask} needMoreTime={needMoreTime}/>
+        <TasksCard data={myTasks} endTask={endTask} updatePage={updatePage} />
     </Container>
   );
 }
