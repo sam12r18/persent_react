@@ -32,9 +32,9 @@ export default function EmployeeDashboard() {
                         <span className="fs-5">نام کاربر</span>
                     </div>
                     <div>
-                        <Link to={"#"}  className="btn btn-pink text-white rounded-4 fs-7">
-                            نقش کاربر
-                        </Link>
+                        <span className="btn btn-pink text-white rounded-4 px-4 ">
+                             کاربر
+                        </span>
                     </div>
                 </div>
                 <div className={"d-flex flex-column gap-4"}>

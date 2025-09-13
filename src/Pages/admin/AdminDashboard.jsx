@@ -32,9 +32,9 @@ export default function AdminDashboard() {
                         <span className="fs-5">نام کاربر</span>
                     </div>
                     <div>
-                        <Link to={"#"}  className="btn btn-pink text-white rounded-4 fs-7">
-                            نقش مدیر
-                        </Link>
+                        <span  className="btn btn-pink text-white rounded-4 px-3">
+                             مدیر
+                        </span>
                     </div>
                 </div>
                 <div className={"d-flex flex-column gap-4"}>
