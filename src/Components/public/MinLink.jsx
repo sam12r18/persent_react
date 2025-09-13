@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
  * @param {string} text - متن دکمه
  * @param {string} textColor - رنک متن دکمه
  */
-export default function MinLink({ to = "#", bgColor = "primary", text = "", textColor = "" }) {
+export default function MinLink({ to = "#", bgColor = "btn-primary", text = "", textColor = "" }) {
     return (
         <Link
             to={to}

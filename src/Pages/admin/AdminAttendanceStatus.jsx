@@ -21,7 +21,7 @@ export default function AdminAttendanceStatus() {
     },[])
     return (
         <Container className={"container-sm mt-3"}>
-            <Image src={"/img/Success.png"} className={"mx-auto"} />
+            <Image src={"/img/Success.png"} className={"mx-auto d-block"} />
            <AttendanceStatus status={status} userClock={userClock}/>
             <Link to={"/admin"} className={"btn bg-orange rounded-5 text-white fs-5 w-100  p-3"}>خانه</Link>
         </Container>

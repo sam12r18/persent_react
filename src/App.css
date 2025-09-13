@@ -17,14 +17,14 @@
 
 }
 :root, [data-bs-theme="green"] {
-  --rs-color-green: #0e6e1d;
+  --rs-color-green: #1B5E20;
 }
 :root, [data-bs-theme="red"] {
-  --rs-color-red: #EF5350;
-  --rs-bg-color-red: #EF5350;
+  --rs-color-red: #B71C1C;
+  --rs-bg-color-red: #B71C1C;
 }
 :root, [data-bs-theme="yellow"] {
-  --rs-color-yellow: #FFEE58;
+  --rs-color-yellow: #FFEB3B;
 }
 :root, [data-bs-theme="blue"] {
   --rs-color-blue: #6294C2;
