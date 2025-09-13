@@ -11,14 +11,12 @@ import CustomBtn from "../../Components/public/CustomBtn.jsx";
 import useAlert from "../../hook/Alert.jsx";
 import SelectInput from "../../Components/public/Inputs/SelectInput.jsx";
 import DateInput from "../../Components/public/Inputs/DateInput.jsx";
+import FileInput from "../../Components/public/Inputs/FileInput.jsx";
 
 export default function AdminProfile() {
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
-    const [selectedFileName, setSelectedFileName] = useState("");
-    const [imagePreview, setImagePreview] = useState(null);
     const alert = useAlert();
-
     const {
         register,
         handleSubmit,
@@ -28,7 +26,6 @@ export default function AdminProfile() {
         control,
         reset,
     } = useForm({ mode: "onChange" });
-
     const fetchData = async () => {
         try {
             const response = await apiGet(`profile`);
@@ -44,9 +41,6 @@ export default function AdminProfile() {
                     mobile: response.mobile || "",
                     avatar: response.avatar || null,
                 });
-            }
-            if (response.avatar) {
-                setImagePreview(`${import.meta.env.VITE_API_URL}/${response.avatar}`);
             }
         } catch (error) {
             console.log("this is error", error);
@@ -109,34 +103,7 @@ export default function AdminProfile() {
                 <Form onSubmit={handleSubmit(onSubmit)}>
                     <CustomInputs type={"text"} placeHolder={"اینجا بنویسید"} label={"نام و نام خانوادگی"} post={"fullName"} register={register} errors={errors}/>
                     <SelectInput label=" جنسیت" post="gender" register={register} errors={errors} fallbackOptions={[{ value: "male", label: "مرد" }, { value: "female", label: "زن" },]}/>
-                    <Form.Group className="mb-4 position-relative">
-                        <Form.Label className={`fs-6 py-2 px-2 rounded-4 position-absolute top-0 start-0 translate-middle-y ms-3 bg-white`} style={{ zIndex: 2, pointerEvents: "none", whiteSpace: "nowrap" }}>
-                            انتخاب عکس پروفایل
-                        </Form.Label>
-                        <Form.Control id="profilePhoto" type="file" accept="image/*" className="d-none"{...register("avatar")}
-                            onChange={(e) => {
-                                const file = e.target.files?.[0];
-                                if (file) {
-                                    setSelectedFileName(file.name);
-                                    const reader = new FileReader();
-                                    reader.onloadend = () => setImagePreview(reader.result);
-                                    reader.readAsDataURL(file);
-
-                                    // ست کردن فقط همون فایل در فرم
-                                    setValue("avatar", file);
-                                } else {
-                                    setSelectedFileName("");
-                                    setImagePreview(null);
-                                    setValue("avatar", null);
-                                }
-                            }}/>
-                        <label htmlFor="profilePhoto" className="btn btn-outline-secondary rounded-5 py-3 w-100 fs-5" style={{ cursor: "pointer" }}>{selectedFileName || "انتخاب عکس پروفایل"}</label>
-                        {imagePreview && (
-                            <div className="mt-3 text-center">
-                                <img src={imagePreview} alt="Preview" style={{maxWidth: "200px", maxHeight: "200px", borderRadius: "10px", objectFit: "cover",}}/>
-                            </div>
-                        )}
-                    </Form.Group>
+                    <FileInput post={"avatar"} register={register} setValue={setValue}/>
                     <DateInput control={control} post="birthday" register={register} errors={errors} setValue={setValue} text="تاریخ تولد" isStartDate={true} isBirthDay={true}/>
                     <CustomInputs type={"number"} placeHolder={"اینجا بنویسید"} label={"کد ملی"} post={"national_code"} register={register} errors={errors} minLength={{ value: 10, message: "کد ملی باید 10 رقم باشه" }} maxLength={{ value: 10, message: "کد ملی باید 10 رقم باشه" }}/>
                     <CustomInputs type={"email"} placeHolder={"اینجا بنویسید"} label={"ایمیل"} post={"email"} register={register} errors={errors}/>
