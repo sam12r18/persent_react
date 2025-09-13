@@ -28,8 +28,22 @@ export default function EmployeeEnterConfirmation() {
     },[])
     const  handleConfirmEntry = async () => {
         setLoading(true);
+        let finalCompany = company;
+        if (!finalCompany || Object.keys(finalCompany).length === 0) {
+            const stored = localStorage.getItem("companyData");
+            if (stored) {
+                finalCompany = JSON.parse(stored);
+            }
+        }
+        let finalLocation = sendLocation;
+        if (!finalLocation || Object.keys(finalLocation).length === 0) {
+            const stored_location = localStorage.getItem("location");
+            if (stored_location) {
+                finalLocation = JSON.parse(stored_location);
+            }
+        }
         try {
-            const response = await apiPost(`attendance_check`,{company_id:company.id , lat:sendLocation.lat , lng:sendLocation.lng ,check:"check_in",device_id:'' , with_schedule:false} );
+            const response = await apiPost(`attendance_check`,{company_id:finalCompany.id , lat:finalLocation.lat , lng:finalLocation.lng ,check:"check_in",device_id:'' , with_schedule:false} );
             console.log("this is response", response);
             setTimeout(()=>{
                 navigate('/employee/attendance-status?status=enter')
